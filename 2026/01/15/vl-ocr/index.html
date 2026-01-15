@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="汽车行驶证ocr识别 目录   汽车行驶证ocr识别 基于飞桨OCR的行驶证OCR模型训练全流程 数据集的构建 飞桨官方标注软件 PPocrLabel 标注的注意事项 数据集的划分   其他标注软件 Label studio     PPOCRV5推理模型的使用 PPOCRV5检测和识别模型聚合推理 PPOCRV5检测模型的推理 PPOCRV5识别模型的推理   PPOCRV5模型的训练流程 PP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vl-ocr">
+<meta property="og:url" content="http://example.com/2026/01/15/vl-ocr/index.html">
+<meta property="og:site_name" content="ChengJiaxin&#39;Blog">
+<meta property="og:description" content="汽车行驶证ocr识别 目录   汽车行驶证ocr识别 基于飞桨OCR的行驶证OCR模型训练全流程 数据集的构建 飞桨官方标注软件 PPocrLabel 标注的注意事项 数据集的划分   其他标注软件 Label studio     PPOCRV5推理模型的使用 PPOCRV5检测和识别模型聚合推理 PPOCRV5检测模型的推理 PPOCRV5识别模型的推理   PPOCRV5模型的训练流程 PP">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="og:image" content="http://example.com/img/404.jpg">
+<meta property="article:published_time" content="2026-01-15T02:24:21.000Z">
+<meta property="article:modified_time" content="2026-01-15T13:47:37.011Z">
+<meta property="article:author" content="Cheng jiaxin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/404.jpg">
+
+
+<title >vl-ocr</title>
+
+<!-- Favicon -->
+
+    <link href='/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"example.com","author":"Cheng jiaxin","root":"/","typed_text":["Web Developer"],"theme_version":"2.2.7","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"nike.jpg","icon16":"nike.jpg","icon32":"nike.jpg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦！","wnbmanifest":"/site.webmanifest","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"04/10/2022 17:00:00","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":true,"el":".trm-banner"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2026-01-15 21:47:37"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.7" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/nike.jpg">
+    
+    
+        <div class="trm-logo-text">
+            煎饺<span>萝卜</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/project/" target="">
+                    项目
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/links/" target="">
+                    友情链接
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="http://www.shenminjie.online/" target="_blank">
+                            struct@杰构体
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a  href="//www.imalun.com/" target="_blank">
+                            白云苍狗
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            vl-ocr
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2026
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/nike.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        萝卜煎饺
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://github.com" title="facebook" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-facebook"></i>
+        </a>
+    
+        <a href="https://github.com" title="qq" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://github.com" title="Twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+        <a href="https://github.com" title="youtube" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-youtube"></i>
+        </a>
+    
+        <a href="https://github.com" title="wechat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="https://github.com" title="instagram" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-instagram"></i>
+        </a>
+    
+        <a href="https://github.com" title="zhihu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://github.com" title="weibo" rel="nofollow" target="_blank">
+            <i class="iconfont fab weibo"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                25
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                城市:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星球:
+            </div>
+            <div class="trm-label trm-label-light">
+                火星
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:1768900816@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/15
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            10:24
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Cheng jiaxin
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="汽车行驶证ocr识别"><a href="#汽车行驶证ocr识别" class="headerlink" title="汽车行驶证ocr识别"></a><center>汽车行驶证ocr识别</center></h1><hr>
+<h2 style="text-align: center; font-size: 30px;">目录</h2>
+
+<ul>
+<li><a href="#%E6%B1%BD%E8%BD%A6%E8%A1%8C%E9%A9%B6%E8%AF%81ocr%E8%AF%86%E5%88%AB">汽车行驶证ocr识别</a><ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%A3%9E%E6%A1%A8ocr%E7%9A%84%E8%A1%8C%E9%A9%B6%E8%AF%81ocr%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%85%A8%E6%B5%81%E7%A8%8B">基于飞桨OCR的行驶证OCR模型训练全流程</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E6%9E%84%E5%BB%BA">数据集的构建</a><ul>
+<li><a href="#%E9%A3%9E%E6%A1%A8%E5%AE%98%E6%96%B9%E6%A0%87%E6%B3%A8%E8%BD%AF%E4%BB%B6">飞桨官方标注软件</a><ul>
+<li><a href="#ppocrlabel">PPocrLabel</a></li>
+<li><a href="#%E6%A0%87%E6%B3%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">标注的注意事项</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%88%92%E5%88%86">数据集的划分</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96%E6%A0%87%E6%B3%A8%E8%BD%AF%E4%BB%B6">其他标注软件</a><ul>
+<li><a href="#label-studio">Label studio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ppocrv5%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BD%BF%E7%94%A8">PPOCRV5推理模型的使用</a><ul>
+<li><a href="#ppocrv5%E6%A3%80%E6%B5%8B%E5%92%8C%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B%E8%81%9A%E5%90%88%E6%8E%A8%E7%90%86">PPOCRV5检测和识别模型聚合推理</a></li>
+<li><a href="#ppocrv5%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86">PPOCRV5检测模型的推理</a></li>
+<li><a href="#ppocrv5%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86">PPOCRV5识别模型的推理</a></li>
+</ul>
+</li>
+<li><a href="#ppocrv5%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83%E6%B5%81%E7%A8%8B">PPOCRV5模型的训练流程</a><ul>
+<li><a href="#ppocrv5%E6%A3%80%E6%B5%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83">PPOCRV5检测模型的训练</a></li>
+<li><a href="#ppocrv5%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83">PPOCRV5识别模型的训练</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%88%B0%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B%E8%BD%AC%E6%8D%A2">训练模型到推理模型转换</a></li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81">匹配相关代码</a><ul>
+<li><a href="#%E5%85%88%E5%AF%B9%E8%AF%86%E5%88%AB%E7%BB%93%E6%9E%9C%E8%BF%9B%E8%A1%8C%E5%A4%84%E7%90%86">先对识别结果进行处理</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E5%8C%B9%E9%85%8D">文本匹配</a></li>
+<li><a href="#%E4%BD%8D%E7%BD%AE%E5%8C%B9%E9%85%8D">位置匹配</a></li>
+<li><a href="#%E7%BB%BC%E5%90%88%E4%BB%A3%E7%A0%81">综合代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#api%E7%9A%84%E5%BC%80%E5%8F%91%E5%8F%8A%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81">API的开发及相关代码</a><ul>
+<li><a href="#%E9%9C%80%E8%A6%81%E4%B8%8B%E8%BD%BD%E7%9A%84%E5%8C%85">需要下载的包</a></li>
+<li><a href="#%E5%90%8E%E7%AB%AF%E8%BF%90%E8%A1%8C%E4%BB%A3%E7%A0%81">后端运行代码</a></li>
+<li><a href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BE%93%E5%85%A5">客户端输入</a></li>
+</ul>
+</li>
+<li><a href="#docker%E6%89%93%E5%8C%85">Docker打包</a><ul>
+<li><a href="#dockerfile%E7%9A%84%E6%9E%84%E5%BB%BA">Dockerfile的构建</a></li>
+<li><a href="#%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F">构建镜像</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%A1%8C%E9%A9%B6%E8%AF%81ocr">其他方式实现的行驶证OCR</a><ul>
+<li><a href="#%E5%9F%BA%E4%BA%8Edify%E7%9A%84%E8%A1%8C%E9%A9%B6%E8%AF%81ocr">基于dify的行驶证OCR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="基于飞桨OCR的行驶证OCR模型训练全流程"><a href="#基于飞桨OCR的行驶证OCR模型训练全流程" class="headerlink" title="基于飞桨OCR的行驶证OCR模型训练全流程"></a>基于飞桨OCR的行驶证OCR模型训练全流程</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52852432/article/details/131817619">基于PPOCR的行驶证识别全流程参考</a></p>
+<h3 id="数据集的构建"><a href="#数据集的构建" class="headerlink" title="数据集的构建"></a>数据集的构建</h3><p>任务所要识别的标签：</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签名</th>
+<th align="left">映射</th>
+<th align="left">标签修改</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PlateNo</td>
+<td align="left">号牌号码</td>
+<td align="left">“label”: “PlateNo”,</td>
+</tr>
+<tr>
+<td align="left">VehicleType</td>
+<td align="left">车辆类型</td>
+<td align="left">“label”: “VehicleType”,</td>
+</tr>
+<tr>
+<td align="left">Owner</td>
+<td align="left">所有人</td>
+<td align="left">“label”: “Owner”,</td>
+</tr>
+<tr>
+<td align="left">UseCharacter</td>
+<td align="left">使用性质</td>
+<td align="left">“label”: “UseCharacter”,</td>
+</tr>
+<tr>
+<td align="left">Model</td>
+<td align="left">品牌型号</td>
+<td align="left">“label”: “Model”,</td>
+</tr>
+<tr>
+<td align="left">VIN</td>
+<td align="left">车辆识别代码</td>
+<td align="left">“label”: “VIN”,</td>
+</tr>
+<tr>
+<td align="left">EngineNo</td>
+<td align="left">发动机号码</td>
+<td align="left">“label”: “EngineNo”,</td>
+</tr>
+<tr>
+<td align="left">RegisterDate</td>
+<td align="left">注册日期</td>
+<td align="left">“label”: “RegisterDate”,</td>
+</tr>
+<tr>
+<td align="left">FuelType</td>
+<td align="left">燃料类型</td>
+<td align="left">“label”: “FuelType”,</td>
+</tr>
+</tbody></table>
+<h4 id="飞桨官方标注软件"><a href="#飞桨官方标注软件" class="headerlink" title="飞桨官方标注软件"></a>飞桨官方标注软件</h4><h5 id="PPocrLabel"><a href="#PPocrLabel" class="headerlink" title="PPocrLabel"></a>PPocrLabel</h5><p>本文使用的是<a target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleOCR/tree/release/2.4">PPOCR中2.4版本</a>的标注软件</p>
+<p>环境配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">conda create --name ppocr python=3.8 --channel https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"></span><br><span class="line">conda activate ppocr</span><br><span class="line"></span><br><span class="line">pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line">pip install PyQt5 sip</span><br><span class="line"></span><br><span class="line">pip3 install --upgrade pip</span><br><span class="line"></span><br><span class="line">pip install paddlepaddle -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line"></span><br><span class="line">pip install numpy==1.23.5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动标注软件，在终端打开下载的2.4版本代码文件夹</p>
+<blockquote>
+<p>cd .&#x2F;PPOCRLabel<br>python PPOCRLabel.py –lang ch</p>
+</blockquote>
+<p>标注软件展示<br><img src="/../image/%E6%A0%87%E8%AE%B0%E8%BD%AF%E4%BB%B6.png" alt="PPOCR标注软件"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h5 id="标注的注意事项"><a href="#标注的注意事项" class="headerlink" title="标注的注意事项"></a>标注的注意事项</h5><ol>
+<li>该版本的标注软件在某些频繁操作下容易闪退，故在标注之前勾选自动导出标记结果</li>
+<li>导出标记结果会导出<strong>Label.txt</strong>和<strong>fileState.txt</strong>文件，Label文件包含导出识别结果会导出<strong>crop_img</strong>文件夹和<strong>rec_gt.txt</strong>文件，如下所示：<br><img src="/../image/%E6%A0%87%E8%AE%B0%E8%BD%AF%E4%BB%B6%E5%AF%BC%E5%87%BA%E7%BB%93%E6%9E%9C.png" alt="标记结果"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></li>
+</ol>
+<ul>
+<li>其中Label文件内容和fileState文本用于检测模型的训练，具体内容格式如下所示：</li>
+</ul>
+<p><img src="/../image/Label%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png" alt="Label文件中的具体内容"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><img src="/../image/fileState%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png" alt="fileState文件中的具体内容"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<ul>
+<li>crop_img文件夹和rec_gt.txt文件用于文字识别模型的训练，具体内容格式如下所示：</li>
+</ul>
+<p><img src="/../image/rec_gt%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9.png" alt="rec_get文件具体内容"  data-tag='post-image' onload='this.onload=null;this.style.opacity=1;' loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>3. 在标注行驶证之前最好对原图片进行处理，在软件上进行处理容易闪退</p>
+<h5 id="数据集的划分"><a href="#数据集的划分" class="headerlink" title="数据集的划分"></a>数据集的划分</h5><p>在标注完成后，在根目录建立train_data文件夹，并将从PPOCRLabel中导出的标注数据入其中，在终端运行以下命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 命令行格式划分</span></span><br><span class="line"> python gen_ocr_train_val_test.py --trainValTestRatio <span class="number">8</span>:<span class="number">1</span>:<span class="number">1</span> --datasetRootPath ../train_data/标注的数据</span><br><span class="line"><span class="comment"># trainValTestRatio 设置训练集、验证集、测试集的比例，</span></span><br><span class="line"><span class="comment"># datasetRootPath  设置标注文件的路径</span></span><br><span class="line"><span class="comment"># 可以直接在gen_ocr_train_val_test.py文件中修改这两个参数</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="其他标注软件"><a href="#其他标注软件" class="headerlink" title="其他标注软件"></a>其他标注软件</h4><h5 id="Label-studio"><a href="#Label-studio" class="headerlink" title="Label studio"></a>Label studio</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_72915515/article/details/134248502">label-studio使用方法参考链接</a><br><a target="_blank" rel="noopener" href="https://labelstud.io/guide/start">label-studio官网使用文档链接</a></p>
+<p>label-studio下载及启动：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n rolabel python==<span class="number">2.6</span></span><br><span class="line">pip install label-studio</span><br><span class="line">label-studio <span class="comment">#转到 F:\WorkProject\OCR-VL\roLabelImg 文件启动label-studio</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="PPOCRV5推理模型的使用"><a href="#PPOCRV5推理模型的使用" class="headerlink" title="PPOCRV5推理模型的使用"></a>PPOCRV5推理模型的使用</h3><h4 id="PPOCRV5检测和识别模型聚合推理"><a href="#PPOCRV5检测和识别模型聚合推理" class="headerlink" title="PPOCRV5检测和识别模型聚合推理"></a>PPOCRV5检测和识别模型聚合推理</h4><p>步骤如下：</p>
+<ol>
+<li>根据requestment.txt文件配置好环境后，下载paddlepaddle-gpu以及pyyaml</li>
+<li>配置<code>tools-&gt; infer</code>文件夹下的的<code>utility.py</code>文件，一般修改<code>image_dir</code>、<code>det_model_dir</code>以及<code>rec_model_dir</code>即可，其中<code>image_dir</code>表示要预测图片的路径，<code>det_model_dir</code>表示检测模型的文件夹，<code>rec_model_dir</code>表示识别模型的文件夹。</li>
+<li>运行<code>predict_system.py</code>文件</li>
+</ol>
+<h4 id="PPOCRV5检测模型的推理"><a href="#PPOCRV5检测模型的推理" class="headerlink" title="PPOCRV5检测模型的推理"></a>PPOCRV5检测模型的推理</h4><ul>
+<li>命令行推理</li>
+</ul>
+<blockquote>
+<p>python tools&#x2F;infer_det.py -c configs&#x2F;det&#x2F;检测模型对应的yaml文件路径 -o Global.pretrained_model&#x3D;以<code>pdparams</code>结尾的检测模型路径 Global.infer_img&#x3D;”推理图片的路径，可以为文件夹”</p>
+</blockquote>
+<ul>
+<li>直接用pycharm运行<ul>
+<li>在<code>tools</code>文件夹下的<code>program.py</code>文件中修改配置文件的路径为对应模型的配置文件路径</li>
+<li>修改配置文件中的<code>pretrained_model</code>、<code>infer_img</code>、<code>save_inference_dir</code>对应的路径</li>
+<li>运行<code>tools</code>文件夹下<code>infer_det.py</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="PPOCRV5识别模型的推理"><a href="#PPOCRV5识别模型的推理" class="headerlink" title="PPOCRV5识别模型的推理"></a>PPOCRV5识别模型的推理</h4><ul>
+<li>命令行推理</li>
+</ul>
+<blockquote>
+<p>python tools&#x2F;infer_rec.py -c configs&#x2F;rec&#x2F;识别模型对应的yaml文件路径 -o Global.pretrained_model&#x3D;以<code>pdparams</code>结尾的识别模型路径 Global.infer_img&#x3D;”推理图片的路径，可以为文件夹”  </p>
+</blockquote>
+<ul>
+<li>直接用pycharm运行<ul>
+<li>在<code>tools</code>文件夹下的<code>program.py</code>文件中修改配置文件的路径为对应模型的配置文件路径</li>
+<li>修改配置文件中的<code>pretrained_model</code>、<code>infer_img</code>、<code>save_inference_dir</code>对应的路径</li>
+<li>运行<code>tools</code>文件夹下<code>infer_rec.py</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="PPOCRV5模型的训练流程"><a href="#PPOCRV5模型的训练流程" class="headerlink" title="PPOCRV5模型的训练流程"></a>PPOCRV5模型的训练流程</h3><h4 id="PPOCRV5检测模型的训练"><a href="#PPOCRV5检测模型的训练" class="headerlink" title="PPOCRV5检测模型的训练"></a>PPOCRV5检测模型的训练</h4><blockquote>
+<p>python tools&#x2F;train.py -c 检测模型配置文件，以<code>.yml</code>结尾</p>
+</blockquote>
+<p>一般设置<code>use_gpu</code>、<code>epoch_num</code>、<code>save_model_dir</code>、<code>pretrained_model</code>、<code>Train-&gt;data_dir</code>、<code>Train-&gt;label_file_list</code>等参数。</p>
+<h4 id="PPOCRV5识别模型的训练"><a href="#PPOCRV5识别模型的训练" class="headerlink" title="PPOCRV5识别模型的训练"></a>PPOCRV5识别模型的训练</h4><blockquote>
+<p>python tools&#x2F;train.py -c 识别模型配置文件，以<code>.yml</code>结尾</p>
+</blockquote>
+<p>配置文件参数设置同检测模型</p>
+<hr>
+<h3 id="训练模型到推理模型转换"><a href="#训练模型到推理模型转换" class="headerlink" title="训练模型到推理模型转换"></a>训练模型到推理模型转换</h3><ul>
+<li>命令行转换：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python tools/export_model.py -c <span class="string">&quot;配置文件路径，以.yml结尾&quot;</span> -o Global.pretrained_model=<span class="string">&quot;训练的模型路径，以.pdparams结尾&quot;</span> Global.save_inference_dir=<span class="string">&quot;保存模型的路径&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Pycharm运行文件<ol>
+<li>设置.yml结尾的配置文件，包括<code>pretrained_model</code>和<code>save_inference_dir</code></li>
+<li>运行<code>export_model.py</code>文件</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="匹配相关代码"><a href="#匹配相关代码" class="headerlink" title="匹配相关代码"></a>匹配相关代码</h3><h4 id="先对识别结果进行处理"><a href="#先对识别结果进行处理" class="headerlink" title="先对识别结果进行处理"></a>先对识别结果进行处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_preprocess_items</span>(<span class="params">self, dt_boxes: <span class="type">List</span>[np.ndarray], rec_res: <span class="type">List</span>[<span class="type">Tuple</span>[<span class="built_in">str</span>, <span class="built_in">float</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">Dict</span>]:</span><br><span class="line">       <span class="string">&quot;&quot;&quot;预处理所有项目，计算边界框和中心点&quot;&quot;&quot;</span></span><br><span class="line">       processed = []</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span> i, (box, (text, confidence)) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(dt_boxes, rec_res)):</span><br><span class="line">           <span class="comment"># 计算边界框的坐标</span></span><br><span class="line">           x_coords = box[:, <span class="number">0</span>]</span><br><span class="line">           y_coords = box[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">           x1, x2 = np.<span class="built_in">min</span>(x_coords), np.<span class="built_in">max</span>(x_coords)</span><br><span class="line">           y1, y2 = np.<span class="built_in">min</span>(y_coords), np.<span class="built_in">max</span>(y_coords)</span><br><span class="line"></span><br><span class="line">           processed.append(&#123;</span><br><span class="line">               <span class="string">&#x27;index&#x27;</span>: i,</span><br><span class="line">               <span class="string">&#x27;text&#x27;</span>: text.strip(),</span><br><span class="line">               <span class="string">&#x27;confidence&#x27;</span>: confidence,</span><br><span class="line">               <span class="string">&#x27;x1&#x27;</span>: x1,</span><br><span class="line">               <span class="string">&#x27;y1&#x27;</span>: y1,</span><br><span class="line">               <span class="string">&#x27;x2&#x27;</span>: x2,</span><br><span class="line">               <span class="string">&#x27;y2&#x27;</span>: y2,</span><br><span class="line">               <span class="string">&#x27;center_x&#x27;</span>: (x1 + x2) / <span class="number">2</span>,</span><br><span class="line">               <span class="string">&#x27;center_y&#x27;</span>: (y1 + y2) / <span class="number">2</span>,</span><br><span class="line">               <span class="string">&#x27;width&#x27;</span>: x2 - x1,</span><br><span class="line">               <span class="string">&#x27;height&#x27;</span>: y2 - y1,</span><br><span class="line">               <span class="string">&#x27;polygon&#x27;</span>: box  <span class="comment"># 保留原始多边形坐标</span></span><br><span class="line">           &#125;)</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> processed</span><br></pre></td></tr></table></figure>
+
+<h4 id="文本匹配"><a href="#文本匹配" class="headerlink" title="文本匹配"></a>文本匹配</h4><p>根据行驶证每个字段的内容特征对识别的结果进行匹配。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_content_matcher</span>(<span class="params">self, items: <span class="type">List</span>[<span class="type">Dict</span>], target_fields:<span class="type">Dict</span>,</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> field_name, keywords <span class="keyword">in</span> target_fields.items():</span><br><span class="line">            matched_id = []</span><br><span class="line">            <span class="comment"># 对燃料类型进行筛选</span></span><br><span class="line">            <span class="keyword">if</span> field_name == <span class="string">&quot;燃料类型&quot;</span>:</span><br><span class="line">                fuel_keywords = [<span class="string">&#x27;汽油&#x27;</span>, <span class="string">&#x27;柴油&#x27;</span>, <span class="string">&#x27;天然气&#x27;</span>, <span class="string">&#x27;新能源/电&#x27;</span>,<span class="string">&#x27;柴&#x27;</span>,<span class="string">&#x27;油&#x27;</span>,<span class="string">&#x27;新能源电&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> fuel_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;号牌号码&quot;</span>:</span><br><span class="line">                patterns = [</span><br><span class="line">                    <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;5&#125;$&#x27;</span>,  <span class="comment"># 普通车牌</span></span><br><span class="line">                    <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;6&#125;$&#x27;</span>,  <span class="comment"># 新能源车牌</span></span><br><span class="line">                ]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 提取文本后面7位进行匹配，如果都不符合则提取后面8位重新匹配</span></span><br><span class="line">                    content = item[<span class="string">&#x27;text&#x27;</span>][-<span class="number">7</span>:]</span><br><span class="line">                    <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                        <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        content = item[<span class="string">&#x27;text&#x27;</span>][-<span class="number">8</span>:]</span><br><span class="line">                        <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                                matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆类型&quot;</span>:</span><br><span class="line">                type_keywords = [<span class="string">&#x27;微型&#x27;</span>, <span class="string">&#x27;轻型&#x27;</span>, <span class="string">&#x27;中型&#x27;</span>, <span class="string">&#x27;重型&#x27;</span>, <span class="string">&#x27;半挂&#x27;</span>, <span class="string">&#x27;全挂&#x27;</span>,</span><br><span class="line">                                 <span class="string">&#x27;普通&#x27;</span>, <span class="string">&#x27;栏板&#x27;</span>, <span class="string">&#x27;厢式&#x27;</span>, <span class="string">&#x27;专项&#x27;</span>, <span class="string">&#x27;仓栅&#x27;</span>, <span class="string">&#x27;特殊&#x27;</span>, <span class="string">&#x27;自卸&#x27;</span>, <span class="string">&#x27;牵引&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> type_keywords:</span><br><span class="line">                        <span class="comment"># 如果关键词在文本中出现，并限制文本只含有中文</span></span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text <span class="keyword">and</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^[\u4e00-\u9fa5]+$&#x27;</span>, text):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;使用性质&quot;</span>:</span><br><span class="line">                usage_keywords = [<span class="string">&#x27;非营运&#x27;</span>, <span class="string">&#x27;营运&#x27;</span>, <span class="string">&#x27;出租&#x27;</span>, <span class="string">&#x27;货运&#x27;</span>, <span class="string">&#x27;客运&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> usage_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;品牌型号&quot;</span>:</span><br><span class="line">                pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5]&#123;0,5&#125;牌[a-zA-Z0-9\-]+$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆识别代号&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;筛选字符串，如果字符串中包含I,Q,O则排除该字符串</span></span><br><span class="line"><span class="string">                   字符串仅由大写字母和数字组成，长度不大于17，</span></span><br><span class="line"><span class="string">                   如果为17位，前12位为字母或数字，后5位为数字&#x27;&#x27;&#x27;</span></span><br><span class="line">                pattern = <span class="string">r&#x27;^(?!.*[IQO])[A-Z0-9]&#123;15,17&#125;$|^(?!.*[IQO])[A-Z0-9]&#123;10,12&#125;[0-9]&#123;5&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">                    punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">                    <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>].replace(<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;1&#x27;</span>).replace(<span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">                    text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;发动机号码&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">                筛选字符串，字符串仅由大写字母和数字组成,长度小于17位</span></span><br><span class="line"><span class="string">                &#x27;&#x27;&#x27;</span></span><br><span class="line">                pattern = <span class="string">r&#x27;^[A-Z0-9]&#123;5,17&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 剔除文本中除了“/”和“-”的其他标点符号</span></span><br><span class="line">                    punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;所有人&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;所有人全部由中文组成，可能包含公司，有限等字样&#x27;&#x27;&#x27;</span></span><br><span class="line">                priority_ids = []</span><br><span class="line">                pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5()（）]&#123;2,&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = re.sub(<span class="string">r&#x27;^(所有人|有人|人)&#x27;</span>,<span class="string">&#x27;&#x27;</span>, item[<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        priority_ids.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                <span class="comment"># 如果priority_ids中有文本包含公司，有限等字样，则优先选择这些文本对应的id,并清除其他id,</span></span><br><span class="line">                <span class="comment"># 否则使用priority_ids中的id，将id传到matched_id中</span></span><br><span class="line">                company_keywords = [<span class="string">&#x27;公司&#x27;</span>, <span class="string">&#x27;有限&#x27;</span>]</span><br><span class="line">                company_ids = []</span><br><span class="line">                <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> priority_ids:</span><br><span class="line">                    text = items[<span class="built_in">id</span>][<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> company_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            company_ids.append(<span class="built_in">id</span>)</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> company_ids:</span><br><span class="line">                    matched_id.extend(company_ids) <span class="comment"># 优先使用包含公司，有限等字样的id</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    matched_id.extend(priority_ids) <span class="comment"># 使用所有符合要求的id</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;注册日期&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;注册日期可能有多种格式，20200520，可能包含注册、日期、注册日期等中文前缀，后面包含2020-05-20等&#x27;&#x27;&#x27;</span></span><br><span class="line">                date_patterns = [</span><br><span class="line">                    <span class="string">r&#x27;(\d&#123;4&#125;)[年\.\-](\d&#123;1,2&#125;)[月\.\-](\d&#123;1,2&#125;)日?&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;8&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;6&#125;-\d&#123;2&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;4&#125;-\d&#123;4&#125;$&#x27;</span>,</span><br><span class="line">                ]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 文字里面只要包含符合日期格式的字符串即可</span></span><br><span class="line">                    <span class="comment">#text = re.sub(r&#x27;^(注册日期|册日期|日期|期)&#x27;,&#x27;&#x27;, item[&#x27;text&#x27;])</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> pattern <span class="keyword">in</span> date_patterns:</span><br><span class="line">                        <span class="comment"># 判断字符串中是否包含符合日期格式的字符串</span></span><br><span class="line">                        <span class="keyword">if</span> re.search(pattern, text):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            result[field_name] = matched_id</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<h4 id="位置匹配"><a href="#位置匹配" class="headerlink" title="位置匹配"></a>位置匹配</h4><p>根据品牌型号的相对位置，以及数据标注的的结果，计算出其他字段的相对位置，其中后面的系数为每个框的平均值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_pos_matcher</span>(<span class="params">self, text_id: <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]], items: <span class="type">List</span>[<span class="type">Dict</span>]</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 以品牌型号为参考字段</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(text_id[<span class="string">&quot;品牌型号&quot;</span>]) == <span class="number">1</span>:</span><br><span class="line">            brand_item = items[text_id[<span class="string">&quot;品牌型号&quot;</span>][<span class="number">0</span>]]</span><br><span class="line">            width = brand_item[<span class="string">&#x27;height&#x27;</span>]</span><br><span class="line">            x1 = brand_item[<span class="string">&#x27;x1&#x27;</span>]</span><br><span class="line">            y1 = brand_item[<span class="string">&#x27;y1&#x27;</span>]</span><br><span class="line">            x2 = brand_item[<span class="string">&#x27;x2&#x27;</span>]</span><br><span class="line">            y2 = brand_item[<span class="string">&#x27;y2&#x27;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> text_id</span><br><span class="line">        <span class="comment"># 定义8个字段的搜索区域，定义左上角的点和右下角的点</span></span><br><span class="line">        serch_areas = &#123;</span><br><span class="line">            <span class="string">&quot;号牌号码&quot;</span>: (x1 - width * <span class="number">5.78</span>, y1 - width * <span class="number">3.94</span>, x2 - width * <span class="number">10.16</span>, y2 - width * <span class="number">4.05</span>),<span class="comment"># 其中左上角(x1,y1),右下角(x2,y2)</span></span><br><span class="line">            <span class="string">&quot;车辆类型&quot;</span>: (x1 + width * <span class="number">1.56</span>, y1 - width * <span class="number">3.95</span>, x2 - width * <span class="number">0.71</span>, y2 - width * <span class="number">4.01</span>),</span><br><span class="line">            <span class="string">&quot;所有人&quot;</span>: (x1 - width * <span class="number">5.68</span>, y1 - width * <span class="number">2.64</span>, x2 - width * <span class="number">5.82</span>, y2 - width * <span class="number">2.66</span>),</span><br><span class="line">            <span class="string">&quot;使用性质&quot;</span>: (x1 - width * <span class="number">5.68</span>, y1 + width * <span class="number">0.07</span>, x2 - width * <span class="number">11.6</span>, y2 - <span class="number">0.05</span> * width),</span><br><span class="line">            <span class="string">&quot;车辆识别代号&quot;</span>: (x1 - width * <span class="number">0.45</span>, y1 + width * <span class="number">1.34</span>, x2 - width * <span class="number">1.56</span>, y2 + width * <span class="number">1.3</span>),</span><br><span class="line">            <span class="string">&quot;发动机号码&quot;</span>: (x1 - width * <span class="number">0.83</span>, y1 + width * <span class="number">2.72</span>, x2 - width * <span class="number">4.55</span>, y2 + width * <span class="number">2.61</span>),</span><br><span class="line">            <span class="string">&quot;注册日期&quot;</span>: (x1 - width * <span class="number">1.79</span>, y1 + width * <span class="number">4.06</span>, x2 - width * <span class="number">5.59</span>, y2 + width * <span class="number">3.99</span>),</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 遍历items，判断每个字段的与对应位置的交并比，占比不为零且最大的作为该字段的值</span></span><br><span class="line">        field_ids = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> field_name, area <span class="keyword">in</span> serch_areas.items():</span><br><span class="line">            left_x, top_y, right_x, bottom_y = area</span><br><span class="line">            <span class="built_in">list</span> = []</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                <span class="comment"># 计算面积交并比，交集占字段本身面积的比例</span></span><br><span class="line">                box_x1 = item[<span class="string">&#x27;x1&#x27;</span>]</span><br><span class="line">                box_y1 = item[<span class="string">&#x27;y1&#x27;</span>]</span><br><span class="line">                box_x2 = item[<span class="string">&#x27;x2&#x27;</span>]</span><br><span class="line">                box_y2 = item[<span class="string">&#x27;y2&#x27;</span>]</span><br><span class="line">                <span class="comment"># 计算交集</span></span><br><span class="line">                inter_x1 = <span class="built_in">max</span>(left_x, box_x1)</span><br><span class="line">                inter_y1 = <span class="built_in">max</span>(top_y, box_y1)</span><br><span class="line">                inter_x2 = <span class="built_in">min</span>(right_x, box_x2)</span><br><span class="line">                inter_y2 = <span class="built_in">min</span>(bottom_y, box_y2)</span><br><span class="line">                inter_area = <span class="built_in">max</span>(<span class="number">0</span>, inter_x2 - inter_x1) * <span class="built_in">max</span>(<span class="number">0</span>, inter_y2 - inter_y1)</span><br><span class="line"></span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;box_area = (box_x2 - box_x1) * (box_y2 - box_y1)</span></span><br><span class="line"><span class="string">                area_area = (right_x - left_x) * (bottom_y - top_y)</span></span><br><span class="line"><span class="string">                union_area = box_area + area_area - inter_area&#x27;&#x27;&#x27;</span></span><br><span class="line">                radio_area = inter_area/((box_x2 - box_x1) * (box_y2 - box_y1))</span><br><span class="line">                <span class="keyword">if</span> radio_area &gt; <span class="number">0</span>:</span><br><span class="line">                    <span class="built_in">list</span>.append((item[<span class="string">&#x27;index&#x27;</span>], radio_area))</span><br><span class="line">                <span class="comment"># 按iou排序，选择最大的前三个，不验证直接输出</span></span><br><span class="line">            <span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">list</span>:</span><br><span class="line">                temp = []</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="number">3</span>, <span class="built_in">len</span>(<span class="built_in">list</span>))):</span><br><span class="line">                    temp.append(<span class="built_in">list</span>[i][<span class="number">0</span>])</span><br><span class="line">                field_ids[field_name] = temp</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                field_ids[field_name] = []</span><br><span class="line">        <span class="keyword">return</span> field_ids</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="综合代码"><a href="#综合代码" class="headerlink" title="综合代码"></a>综合代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> <span class="type">List</span>, <span class="type">Dict</span>, <span class="type">Tuple</span>, <span class="type">Optional</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DrivingLicenseMatcher</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 定义目标字段及其可能的关键词变体</span></span><br><span class="line">        <span class="variable language_">self</span>.target_fields = &#123;</span><br><span class="line">            <span class="string">&quot;号牌号码&quot;</span>: [<span class="string">&quot;号牌号码&quot;</span>, <span class="string">&quot;号牌&quot;</span>,<span class="string">&quot;号码&quot;</span>],</span><br><span class="line">            <span class="string">&quot;车辆类型&quot;</span>: [<span class="string">&quot;车辆类型&quot;</span>, <span class="string">&quot;类型&quot;</span>],</span><br><span class="line">            <span class="string">&quot;所有人&quot;</span>: [<span class="string">&quot;所有人&quot;</span>, <span class="string">&quot;所有&quot;</span>, <span class="string">&quot;所&quot;</span>, <span class="string">&quot;有&quot;</span>, <span class="string">&quot;人&quot;</span>],</span><br><span class="line">            <span class="string">&quot;使用性质&quot;</span>: [<span class="string">&quot;使用性质&quot;</span>, <span class="string">&quot;使用&quot;</span>,<span class="string">&quot;性质&quot;</span>],</span><br><span class="line">            <span class="string">&quot;品牌型号&quot;</span>: [<span class="string">&quot;品牌型号&quot;</span>, <span class="string">&quot;型号&quot;</span>],</span><br><span class="line">            <span class="string">&quot;车辆识别代号&quot;</span>: [<span class="string">&quot;车辆识别代号&quot;</span>],</span><br><span class="line">            <span class="string">&quot;发动机号码&quot;</span>: [<span class="string">&quot;发动机号码&quot;</span>],</span><br><span class="line">            <span class="string">&quot;注册日期&quot;</span>: [<span class="string">&quot;注册日期&quot;</span>],</span><br><span class="line">            <span class="string">&quot;燃料类型&quot;</span>: [<span class="string">&quot;检验记录&quot;</span>],</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">match_fields</span>(<span class="params">self,</span></span><br><span class="line"><span class="params">                     dt_boxes: <span class="type">List</span>[np.ndarray],</span></span><br><span class="line"><span class="params">                     rec_res: <span class="type">List</span>[<span class="type">Tuple</span>[<span class="built_in">str</span>, <span class="built_in">float</span>]]</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="built_in">str</span>]:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(dt_boxes) != <span class="built_in">len</span>(rec_res):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">&quot;dt_boxes和rec_res长度必须一致&quot;</span>)</span><br><span class="line">        <span class="comment"># 预处理文本和位置信息</span></span><br><span class="line">        processed_items = <span class="variable language_">self</span>._preprocess_items(dt_boxes, rec_res)</span><br><span class="line">        <span class="comment"># 文本的匹配的结果</span></span><br><span class="line">        text_result = <span class="variable language_">self</span>._content_matcher(processed_items, <span class="variable language_">self</span>.target_fields)</span><br><span class="line">        <span class="comment"># 打印出对应的所有文本</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;for key, ids in text_result.items():</span></span><br><span class="line"><span class="string">            texts = [processed_items[id][&#x27;text&#x27;] for id in ids]</span></span><br><span class="line"><span class="string">            print(f&quot;文本匹配--&#123;key&#125;: &#123;texts&#125;&quot;)&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 根据位置进行匹配</span></span><br><span class="line">        pos_result = <span class="variable language_">self</span>._pos_matcher(text_result, processed_items)</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;for key, ids in pos_result.items():</span></span><br><span class="line"><span class="string">            texts = [processed_items[id][&#x27;text&#x27;] for id in ids]</span></span><br><span class="line"><span class="string">            print(f&quot;位置匹配-&#123;key&#125;: &#123;texts&#125;&quot;)&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 数据校验</span></span><br><span class="line">        result = <span class="variable language_">self</span>._data_val(text_result, pos_result, processed_items) <span class="comment"># return Dict[str, str]</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;for key, value in result.items():</span></span><br><span class="line"><span class="string">            print(f&quot;最终结果-&#123;key&#125;: &#123;value&#125;&quot;)&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_preprocess_items</span>(<span class="params">self, dt_boxes: <span class="type">List</span>[np.ndarray], rec_res: <span class="type">List</span>[<span class="type">Tuple</span>[<span class="built_in">str</span>, <span class="built_in">float</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">Dict</span>]:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;预处理所有项目，计算边界框和中心点&quot;&quot;&quot;</span></span><br><span class="line">        processed = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, (box, (text, confidence)) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(dt_boxes, rec_res)):</span><br><span class="line">            <span class="comment"># 计算边界框的坐标</span></span><br><span class="line">            x_coords = box[:, <span class="number">0</span>]</span><br><span class="line">            y_coords = box[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">            x1, x2 = np.<span class="built_in">min</span>(x_coords), np.<span class="built_in">max</span>(x_coords)</span><br><span class="line">            y1, y2 = np.<span class="built_in">min</span>(y_coords), np.<span class="built_in">max</span>(y_coords)</span><br><span class="line"></span><br><span class="line">            processed.append(&#123;</span><br><span class="line">                <span class="string">&#x27;index&#x27;</span>: i,</span><br><span class="line">                <span class="string">&#x27;text&#x27;</span>: text.strip(),</span><br><span class="line">                <span class="string">&#x27;confidence&#x27;</span>: confidence,</span><br><span class="line">                <span class="string">&#x27;x1&#x27;</span>: x1,</span><br><span class="line">                <span class="string">&#x27;y1&#x27;</span>: y1,</span><br><span class="line">                <span class="string">&#x27;x2&#x27;</span>: x2,</span><br><span class="line">                <span class="string">&#x27;y2&#x27;</span>: y2,</span><br><span class="line">                <span class="string">&#x27;center_x&#x27;</span>: (x1 + x2) / <span class="number">2</span>,</span><br><span class="line">                <span class="string">&#x27;center_y&#x27;</span>: (y1 + y2) / <span class="number">2</span>,</span><br><span class="line">                <span class="string">&#x27;width&#x27;</span>: x2 - x1,</span><br><span class="line">                <span class="string">&#x27;height&#x27;</span>: y2 - y1,</span><br><span class="line">                <span class="string">&#x27;polygon&#x27;</span>: box  <span class="comment"># 保留原始多边形坐标</span></span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> processed</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_content_matcher</span>(<span class="params">self, items: <span class="type">List</span>[<span class="type">Dict</span>], target_fields:<span class="type">Dict</span>,</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> field_name, keywords <span class="keyword">in</span> target_fields.items():</span><br><span class="line">            matched_id = []</span><br><span class="line">            <span class="comment"># 对燃料类型进行筛选</span></span><br><span class="line">            <span class="keyword">if</span> field_name == <span class="string">&quot;燃料类型&quot;</span>:</span><br><span class="line">                fuel_keywords = [<span class="string">&#x27;汽油&#x27;</span>, <span class="string">&#x27;柴油&#x27;</span>, <span class="string">&#x27;天然气&#x27;</span>, <span class="string">&#x27;新能源/电&#x27;</span>,<span class="string">&#x27;柴&#x27;</span>,<span class="string">&#x27;油&#x27;</span>,<span class="string">&#x27;新能源电&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> fuel_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;号牌号码&quot;</span>:</span><br><span class="line">                patterns = [</span><br><span class="line">                    <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;5&#125;$&#x27;</span>,  <span class="comment"># 普通车牌</span></span><br><span class="line">                    <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;6&#125;$&#x27;</span>,  <span class="comment"># 新能源车牌</span></span><br><span class="line">                ]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 提取文本后面7位进行匹配，如果都不符合则提取后面8位重新匹配</span></span><br><span class="line">                    content = item[<span class="string">&#x27;text&#x27;</span>][-<span class="number">7</span>:]</span><br><span class="line">                    <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                        <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        content = item[<span class="string">&#x27;text&#x27;</span>][-<span class="number">8</span>:]</span><br><span class="line">                        <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                                matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆类型&quot;</span>:</span><br><span class="line">                type_keywords = [<span class="string">&#x27;微型&#x27;</span>, <span class="string">&#x27;轻型&#x27;</span>, <span class="string">&#x27;中型&#x27;</span>, <span class="string">&#x27;重型&#x27;</span>, <span class="string">&#x27;半挂&#x27;</span>, <span class="string">&#x27;全挂&#x27;</span>,</span><br><span class="line">                                 <span class="string">&#x27;普通&#x27;</span>, <span class="string">&#x27;栏板&#x27;</span>, <span class="string">&#x27;厢式&#x27;</span>, <span class="string">&#x27;专项&#x27;</span>, <span class="string">&#x27;仓栅&#x27;</span>, <span class="string">&#x27;特殊&#x27;</span>, <span class="string">&#x27;自卸&#x27;</span>, <span class="string">&#x27;牵引&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> type_keywords:</span><br><span class="line">                        <span class="comment"># 如果关键词在文本中出现，并限制文本只含有中文</span></span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text <span class="keyword">and</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^[\u4e00-\u9fa5]+$&#x27;</span>, text):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;使用性质&quot;</span>:</span><br><span class="line">                usage_keywords = [<span class="string">&#x27;非营运&#x27;</span>, <span class="string">&#x27;营运&#x27;</span>, <span class="string">&#x27;出租&#x27;</span>, <span class="string">&#x27;货运&#x27;</span>, <span class="string">&#x27;客运&#x27;</span>]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> usage_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;品牌型号&quot;</span>:</span><br><span class="line">                pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5]&#123;0,5&#125;牌[a-zA-Z0-9\-]+$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆识别代号&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;筛选字符串，如果字符串中包含I,Q,O则排除该字符串</span></span><br><span class="line"><span class="string">                   字符串仅由大写字母和数字组成，长度不大于17，</span></span><br><span class="line"><span class="string">                   如果为17位，前12位为字母或数字，后5位为数字&#x27;&#x27;&#x27;</span></span><br><span class="line">                pattern = <span class="string">r&#x27;^(?!.*[IQO])[A-Z0-9]&#123;15,17&#125;$|^(?!.*[IQO])[A-Z0-9]&#123;10,12&#125;[0-9]&#123;5&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">                    punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">                    <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>].replace(<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;1&#x27;</span>).replace(<span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">                    text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;发动机号码&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">                筛选字符串，字符串仅由大写字母和数字组成,长度小于17位</span></span><br><span class="line"><span class="string">                &#x27;&#x27;&#x27;</span></span><br><span class="line">                pattern = <span class="string">r&#x27;^[A-Z0-9]&#123;5,17&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 剔除文本中除了“/”和“-”的其他标点符号</span></span><br><span class="line">                    punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;所有人&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;所有人全部由中文组成，可能包含公司，有限等字样&#x27;&#x27;&#x27;</span></span><br><span class="line">                priority_ids = []</span><br><span class="line">                pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5()（）]&#123;2,&#125;$&#x27;</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    text = re.sub(<span class="string">r&#x27;^(所有人|有人|人)&#x27;</span>,<span class="string">&#x27;&#x27;</span>, item[<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                        priority_ids.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                <span class="comment"># 如果priority_ids中有文本包含公司，有限等字样，则优先选择这些文本对应的id,并清除其他id,</span></span><br><span class="line">                <span class="comment"># 否则使用priority_ids中的id，将id传到matched_id中</span></span><br><span class="line">                company_keywords = [<span class="string">&#x27;公司&#x27;</span>, <span class="string">&#x27;有限&#x27;</span>]</span><br><span class="line">                company_ids = []</span><br><span class="line">                <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> priority_ids:</span><br><span class="line">                    text = items[<span class="built_in">id</span>][<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> keyword <span class="keyword">in</span> company_keywords:</span><br><span class="line">                        <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                            company_ids.append(<span class="built_in">id</span>)</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> company_ids:</span><br><span class="line">                    matched_id.extend(company_ids) <span class="comment"># 优先使用包含公司，有限等字样的id</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    matched_id.extend(priority_ids) <span class="comment"># 使用所有符合要求的id</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> field_name == <span class="string">&quot;注册日期&quot;</span>:</span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;注册日期可能有多种格式，20200520，可能包含注册、日期、注册日期等中文前缀，后面包含2020-05-20等&#x27;&#x27;&#x27;</span></span><br><span class="line">                date_patterns = [</span><br><span class="line">                    <span class="string">r&#x27;(\d&#123;4&#125;)[年\.\-](\d&#123;1,2&#125;)[月\.\-](\d&#123;1,2&#125;)日?&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;8&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;6&#125;-\d&#123;2&#125;$&#x27;</span>,</span><br><span class="line">                    <span class="string">r&#x27;^\d&#123;4&#125;-\d&#123;4&#125;$&#x27;</span>,</span><br><span class="line">                ]</span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                    <span class="comment"># 文字里面只要包含符合日期格式的字符串即可</span></span><br><span class="line">                    <span class="comment">#text = re.sub(r&#x27;^(注册日期|册日期|日期|期)&#x27;,&#x27;&#x27;, item[&#x27;text&#x27;])</span></span><br><span class="line">                    text = item[<span class="string">&#x27;text&#x27;</span>]</span><br><span class="line">                    <span class="keyword">for</span> pattern <span class="keyword">in</span> date_patterns:</span><br><span class="line">                        <span class="comment"># 判断字符串中是否包含符合日期格式的字符串</span></span><br><span class="line">                        <span class="keyword">if</span> re.search(pattern, text):</span><br><span class="line">                            matched_id.append(item[<span class="string">&#x27;index&#x27;</span>])</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">            result[field_name] = matched_id</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 位置匹配，根据品牌型号的位置，推断其他字段的位置</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        text_id: Dict[str, List[int]]，表示每个字段对应的文本id列表</span></span><br><span class="line"><span class="string">        items: List[Dict]，表示所有文本及其位置信息</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_pos_matcher</span>(<span class="params">self, text_id: <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]], items: <span class="type">List</span>[<span class="type">Dict</span>]</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 以品牌型号为参考字段</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(text_id[<span class="string">&quot;品牌型号&quot;</span>]) == <span class="number">1</span>:</span><br><span class="line">            brand_item = items[text_id[<span class="string">&quot;品牌型号&quot;</span>][<span class="number">0</span>]]</span><br><span class="line">            width = brand_item[<span class="string">&#x27;height&#x27;</span>]</span><br><span class="line">            x1 = brand_item[<span class="string">&#x27;x1&#x27;</span>]</span><br><span class="line">            y1 = brand_item[<span class="string">&#x27;y1&#x27;</span>]</span><br><span class="line">            x2 = brand_item[<span class="string">&#x27;x2&#x27;</span>]</span><br><span class="line">            y2 = brand_item[<span class="string">&#x27;y2&#x27;</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> text_id</span><br><span class="line">        <span class="comment"># 定义8个字段的搜索区域，定义左上角的点和右下角的点</span></span><br><span class="line">        serch_areas = &#123;</span><br><span class="line">            <span class="string">&quot;号牌号码&quot;</span>: (x1 - width * <span class="number">5.78</span>, y1 - width * <span class="number">3.94</span>, x2 - width * <span class="number">10.16</span>, y2 - width * <span class="number">4.05</span>),<span class="comment"># 其中左上角(x1,y1),右下角(x2,y2)</span></span><br><span class="line">            <span class="string">&quot;车辆类型&quot;</span>: (x1 + width * <span class="number">1.56</span>, y1 - width * <span class="number">3.95</span>, x2 - width * <span class="number">0.71</span>, y2 - width * <span class="number">4.01</span>),</span><br><span class="line">            <span class="string">&quot;所有人&quot;</span>: (x1 - width * <span class="number">5.68</span>, y1 - width * <span class="number">2.64</span>, x2 - width * <span class="number">5.82</span>, y2 - width * <span class="number">2.66</span>),</span><br><span class="line">            <span class="string">&quot;使用性质&quot;</span>: (x1 - width * <span class="number">5.68</span>, y1 + width * <span class="number">0.07</span>, x2 - width * <span class="number">11.6</span>, y2 - <span class="number">0.05</span> * width),</span><br><span class="line">            <span class="string">&quot;车辆识别代号&quot;</span>: (x1 - width * <span class="number">0.45</span>, y1 + width * <span class="number">1.34</span>, x2 - width * <span class="number">1.56</span>, y2 + width * <span class="number">1.3</span>),</span><br><span class="line">            <span class="string">&quot;发动机号码&quot;</span>: (x1 - width * <span class="number">0.83</span>, y1 + width * <span class="number">2.72</span>, x2 - width * <span class="number">4.55</span>, y2 + width * <span class="number">2.61</span>),</span><br><span class="line">            <span class="string">&quot;注册日期&quot;</span>: (x1 - width * <span class="number">1.79</span>, y1 + width * <span class="number">4.06</span>, x2 - width * <span class="number">5.59</span>, y2 + width * <span class="number">3.99</span>),</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 遍历items，判断每个字段的与对应位置的交并比，占比不为零且最大的作为该字段的值</span></span><br><span class="line">        field_ids = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> field_name, area <span class="keyword">in</span> serch_areas.items():</span><br><span class="line">            left_x, top_y, right_x, bottom_y = area</span><br><span class="line">            <span class="built_in">list</span> = []</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> items:</span><br><span class="line">                <span class="comment"># 计算面积交并比，交集占字段本身面积的比例</span></span><br><span class="line">                box_x1 = item[<span class="string">&#x27;x1&#x27;</span>]</span><br><span class="line">                box_y1 = item[<span class="string">&#x27;y1&#x27;</span>]</span><br><span class="line">                box_x2 = item[<span class="string">&#x27;x2&#x27;</span>]</span><br><span class="line">                box_y2 = item[<span class="string">&#x27;y2&#x27;</span>]</span><br><span class="line">                <span class="comment"># 计算交集</span></span><br><span class="line">                inter_x1 = <span class="built_in">max</span>(left_x, box_x1)</span><br><span class="line">                inter_y1 = <span class="built_in">max</span>(top_y, box_y1)</span><br><span class="line">                inter_x2 = <span class="built_in">min</span>(right_x, box_x2)</span><br><span class="line">                inter_y2 = <span class="built_in">min</span>(bottom_y, box_y2)</span><br><span class="line">                inter_area = <span class="built_in">max</span>(<span class="number">0</span>, inter_x2 - inter_x1) * <span class="built_in">max</span>(<span class="number">0</span>, inter_y2 - inter_y1)</span><br><span class="line"></span><br><span class="line">                <span class="string">&#x27;&#x27;&#x27;box_area = (box_x2 - box_x1) * (box_y2 - box_y1)</span></span><br><span class="line"><span class="string">                area_area = (right_x - left_x) * (bottom_y - top_y)</span></span><br><span class="line"><span class="string">                union_area = box_area + area_area - inter_area&#x27;&#x27;&#x27;</span></span><br><span class="line">                radio_area = inter_area/((box_x2 - box_x1) * (box_y2 - box_y1))</span><br><span class="line">                <span class="keyword">if</span> radio_area &gt; <span class="number">0</span>:</span><br><span class="line">                    <span class="built_in">list</span>.append((item[<span class="string">&#x27;index&#x27;</span>], radio_area))</span><br><span class="line">                <span class="comment"># 按iou排序，选择最大的前三个，不验证直接输出</span></span><br><span class="line">            <span class="built_in">list</span>.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">list</span>:</span><br><span class="line">                temp = []</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="number">3</span>, <span class="built_in">len</span>(<span class="built_in">list</span>))):</span><br><span class="line">                    temp.append(<span class="built_in">list</span>[i][<span class="number">0</span>])</span><br><span class="line">                field_ids[field_name] = temp</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                field_ids[field_name] = []</span><br><span class="line">        <span class="keyword">return</span> field_ids</span><br><span class="line"></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        数据校验，对比文本匹配和位置匹配的结果。</span></span><br><span class="line"><span class="string">        1、如果文本匹配无数据，则返回None</span></span><br><span class="line"><span class="string">        2、如果文本匹配有数据，位置匹配无数据，则以文本匹配结果为准</span></span><br><span class="line"><span class="string">        3、如果两者都有数据，则进行如下处理：</span></span><br><span class="line"><span class="string">            (1)、如果两者有交集，且交集唯一，这选定该文本作为最终结果</span></span><br><span class="line"><span class="string">            (2)、如果两者无交集，则以文本匹配结果为准</span></span><br><span class="line"><span class="string">            (3)、如果两者有交集，但交集不唯一，对文本进行验证，取和字段特征最匹配的文本</span></span><br><span class="line"><span class="string">        4、对经过处理返回最终的结果，进行校验，如果不符合字段特征，则返回None</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_data_val</span>(<span class="params">self,text_id: <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]], pos_id: <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="type">List</span>[<span class="built_in">int</span>]], items: <span class="type">List</span>[<span class="type">Dict</span>]</span>) -&gt; <span class="type">Dict</span>[<span class="built_in">str</span>, <span class="built_in">str</span>]:</span><br><span class="line">        fix_id = []</span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> field_name,ids <span class="keyword">in</span> text_id.items():</span><br><span class="line">            <span class="comment"># 先排除已经选定的id,即删除ids中已经在fix_id中的id</span></span><br><span class="line">            <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> fix_id:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">id</span> <span class="keyword">in</span> ids:</span><br><span class="line">                    ids.remove(<span class="built_in">id</span>)</span><br><span class="line">            text_ids = <span class="built_in">set</span>(ids)</span><br><span class="line">            pos_ids = <span class="built_in">set</span>(pos_id.get(field_name, []))</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> text_ids:</span><br><span class="line">                result[field_name] = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">elif</span> <span class="keyword">not</span> pos_ids <span class="keyword">and</span> <span class="built_in">len</span>(ids)==<span class="number">1</span>:</span><br><span class="line">                (text,flag) = <span class="variable language_">self</span>._filed_val(field_name, items[ids[<span class="number">0</span>]][<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                <span class="keyword">if</span> flag:</span><br><span class="line">                    result[field_name] = text</span><br><span class="line">                    fix_id.append(ids[<span class="number">0</span>])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    result[field_name] = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                intersection = text_ids.intersection(pos_ids)</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(intersection) == <span class="number">1</span>:</span><br><span class="line">                    <span class="comment"># 如果交集唯一，则选该文本</span></span><br><span class="line">                    <span class="built_in">id</span> = intersection.pop()</span><br><span class="line">                    (text,flag) = <span class="variable language_">self</span>._filed_val(field_name, items[<span class="built_in">id</span>][<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                    <span class="keyword">if</span> flag:</span><br><span class="line">                        result[field_name] = text</span><br><span class="line">                        fix_id.append(<span class="built_in">id</span>)</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        result[field_name] = <span class="literal">None</span></span><br><span class="line">                <span class="keyword">elif</span> <span class="built_in">len</span>(intersection) == <span class="number">0</span>:</span><br><span class="line">                    <span class="comment"># 如果没有交集，则选文本的ids，进行数据验证返回最符合的，都没有符合的则返回None</span></span><br><span class="line">                    result[field_name] = <span class="literal">None</span></span><br><span class="line">                    <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> ids:</span><br><span class="line">                         (text, flag) = <span class="variable language_">self</span>._filed_val(field_name, items[<span class="built_in">id</span>][<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                         <span class="keyword">if</span> flag:</span><br><span class="line">                             result[field_name] = text</span><br><span class="line">                             fix_id.append(<span class="built_in">id</span>)</span><br><span class="line">                             <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 多个交集，从交集里面选择最符合字段特征的,都没有符合的则返回None</span></span><br><span class="line">                    result[field_name] = <span class="literal">None</span></span><br><span class="line">                    <span class="keyword">for</span> <span class="built_in">id</span> <span class="keyword">in</span> intersection:</span><br><span class="line">                        (text, flag) = <span class="variable language_">self</span>._filed_val(field_name, items[<span class="built_in">id</span>][<span class="string">&#x27;text&#x27;</span>])</span><br><span class="line">                        <span class="keyword">if</span> flag:</span><br><span class="line">                            result[field_name] = text</span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据行驶证匹配规则进行字段验证</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_filed_val</span>(<span class="params">self,field_name:<span class="built_in">str</span>,text:<span class="built_in">str</span></span>)-&gt;<span class="built_in">tuple</span>[<span class="built_in">str</span>, <span class="built_in">bool</span>]:</span><br><span class="line">        flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> field_name == <span class="string">&quot;燃料类型&quot;</span>:</span><br><span class="line">            fuel_keywords = [<span class="string">&#x27;汽油&#x27;</span>, <span class="string">&#x27;柴油&#x27;</span>, <span class="string">&#x27;天然气&#x27;</span>, <span class="string">&#x27;新能源/电&#x27;</span>, <span class="string">&#x27;柴&#x27;</span>, <span class="string">&#x27;油&#x27;</span>, <span class="string">&#x27;新能源电&#x27;</span>]</span><br><span class="line">            <span class="comment"># 如果文本中包含燃料类型关键词，则认为验证通过</span></span><br><span class="line">            <span class="keyword">for</span> keyword <span class="keyword">in</span> fuel_keywords:</span><br><span class="line">                <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                    <span class="keyword">if</span> keyword == <span class="string">&#x27;油&#x27;</span> <span class="keyword">or</span> keyword == <span class="string">&#x27;柴&#x27;</span><span class="keyword">or</span> keyword == <span class="string">&#x27;柴油&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;柴油&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;新能源电&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;新能源/电&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;汽油&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;汽油&#x27;</span></span><br><span class="line">                    flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;号牌号码&quot;</span>:</span><br><span class="line">            patterns = [</span><br><span class="line">                <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;5&#125;$&#x27;</span>,  <span class="comment"># 普通车牌</span></span><br><span class="line">                <span class="string">r&#x27;^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]&#123;6&#125;$&#x27;</span>,  <span class="comment"># 新能源车牌</span></span><br><span class="line">            ]</span><br><span class="line">            <span class="comment"># 提取文本后面7位进行匹配，如果都不符合则提取后面8位重新匹配</span></span><br><span class="line">            content = text[-<span class="number">7</span>:]</span><br><span class="line">            <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                    text = content</span><br><span class="line">                    flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                content = text[-<span class="number">8</span>:]</span><br><span class="line">                <span class="keyword">for</span> pattern <span class="keyword">in</span> patterns:</span><br><span class="line">                    <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, content):</span><br><span class="line">                        text = content</span><br><span class="line">                        flag = <span class="literal">True</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆类型&quot;</span>:</span><br><span class="line">            type_keywords = [<span class="string">&#x27;微型&#x27;</span>, <span class="string">&#x27;轻型&#x27;</span>, <span class="string">&#x27;中型&#x27;</span>, <span class="string">&#x27;重型&#x27;</span>, <span class="string">&#x27;半挂&#x27;</span>, <span class="string">&#x27;全挂&#x27;</span>,</span><br><span class="line">                             <span class="string">&#x27;普通&#x27;</span>, <span class="string">&#x27;栏板&#x27;</span>, <span class="string">&#x27;厢式&#x27;</span>, <span class="string">&#x27;专项&#x27;</span>, <span class="string">&#x27;仓栅&#x27;</span>, <span class="string">&#x27;特殊&#x27;</span>, <span class="string">&#x27;自卸&#x27;</span>, <span class="string">&#x27;牵引&#x27;</span>]</span><br><span class="line">            <span class="keyword">for</span> keyword <span class="keyword">in</span> type_keywords:</span><br><span class="line">                <span class="comment"># 如果关键词在文本中出现，并限制文本只含有中文,并且文本长度小于等于10</span></span><br><span class="line">                <span class="keyword">if</span> keyword <span class="keyword">in</span> text <span class="keyword">and</span> re.<span class="keyword">match</span>(<span class="string">r&#x27;^[\u4e00-\u9fa5]&#123;5,10&#125;$&#x27;</span>, text):</span><br><span class="line">                    <span class="comment"># 如果最后一个字符不是‘车’，则添加‘车’</span></span><br><span class="line">                    <span class="keyword">if</span> text[-<span class="number">1</span>] != <span class="string">&#x27;车&#x27;</span>:</span><br><span class="line">                        text += <span class="string">&#x27;车&#x27;</span></span><br><span class="line">                    flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;使用性质&quot;</span>:</span><br><span class="line">            usage_keywords = [<span class="string">&#x27;非营运&#x27;</span>, <span class="string">&#x27;营运&#x27;</span>, <span class="string">&#x27;出租&#x27;</span>, <span class="string">&#x27;货运&#x27;</span>, <span class="string">&#x27;客运&#x27;</span>]</span><br><span class="line">            <span class="comment"># 如果只有一个‘货’字，则改为‘货运’</span></span><br><span class="line">            <span class="keyword">if</span> text == <span class="string">&#x27;货&#x27;</span>:</span><br><span class="line">                text = <span class="string">&#x27;货运&#x27;</span></span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">for</span> keyword <span class="keyword">in</span> usage_keywords:</span><br><span class="line">                <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                    <span class="keyword">if</span> keyword == <span class="string">&#x27;非营运&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;非营运&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;营运&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;营运&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;出租&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;出租&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;货运&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;货运&#x27;</span></span><br><span class="line">                    <span class="keyword">elif</span> keyword == <span class="string">&#x27;客运&#x27;</span>:</span><br><span class="line">                        text = <span class="string">&#x27;客运&#x27;</span></span><br><span class="line">                    flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;品牌型号&quot;</span>:</span><br><span class="line">            pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5]&#123;0,5&#125;牌[a-zA-Z0-9\-]+$&#x27;</span></span><br><span class="line">            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;车辆识别代号&quot;</span>:</span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;筛选字符串，如果字符串中包含I,Q,O则排除该字符串</span></span><br><span class="line"><span class="string">               字符串仅由大写字母和数字组成，长度不大于17，</span></span><br><span class="line"><span class="string">               如果为17位，前12位为字母或数字，后5位为数字&#x27;&#x27;&#x27;</span></span><br><span class="line">            pattern = <span class="string">r&#x27;^(?!.*[IQO])[A-Z0-9]&#123;15,17&#125;$|^(?!.*[IQO])[A-Z0-9]&#123;10,12&#125;[0-9]&#123;5&#125;$&#x27;</span></span><br><span class="line">            <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">            punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">            <span class="comment"># 把文本中I替换为1</span></span><br><span class="line">            text = text.replace(<span class="string">&#x27;I&#x27;</span>, <span class="string">&#x27;1&#x27;</span>).replace(<span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;发动机号码&quot;</span>:</span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">            筛选字符串，字符串仅由大写字母和数字组成,长度小于17位</span></span><br><span class="line"><span class="string">            &#x27;&#x27;&#x27;</span></span><br><span class="line">            pattern = <span class="string">r&#x27;^[A-Z0-9]&#123;8,17&#125;$&#x27;</span></span><br><span class="line">            punctuation_to_remove = <span class="string">&#x27;!&quot;#$%&amp;\&#x27;()*+,.:;&lt;=&gt;?@[\\]^_`&#123;|&#125;~&#x27;</span></span><br><span class="line">            text = re.sub(<span class="string">f&#x27;[<span class="subst">&#123;re.escape(punctuation_to_remove)&#125;</span>]&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;所有人&quot;</span>:</span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;所有人全部由中文组成，可能包含公司，有限等字样&#x27;&#x27;&#x27;</span></span><br><span class="line">            pattern = <span class="string">r&#x27;^[\u4e00-\u9fa5()（）]&#123;2,&#125;$&#x27;</span></span><br><span class="line">            text = re.sub(<span class="string">r&#x27;^(所有人|有人|人)&#x27;</span>, <span class="string">&#x27;&#x27;</span>, text)</span><br><span class="line">            <span class="keyword">if</span> re.<span class="keyword">match</span>(pattern, text):</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">            <span class="comment"># 如果文本中包含公司，有限等字样，则认为验证通过</span></span><br><span class="line">            company_keywords = [<span class="string">&#x27;公司&#x27;</span>, <span class="string">&#x27;有限&#x27;</span>]</span><br><span class="line">            <span class="keyword">for</span> keyword <span class="keyword">in</span> company_keywords:</span><br><span class="line">                <span class="keyword">if</span> keyword <span class="keyword">in</span> text:</span><br><span class="line">                    flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">elif</span> field_name == <span class="string">&quot;注册日期&quot;</span>:</span><br><span class="line">            <span class="comment"># 如果文本中包含符合日期格式的字符串，则提取出文本中的日期字符串，进行格式化，并和现在的日期进行对比，不能超过当前日期</span></span><br><span class="line">            date_patterns = [</span><br><span class="line">                (<span class="string">r&#x27;\d&#123;8&#125;&#x27;</span>, <span class="string">&#x27;YYYYMMDD&#x27;</span>),</span><br><span class="line">                (<span class="string">r&#x27;\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;&#x27;</span>, <span class="string">&#x27;YYYY-MM-DD&#x27;</span>),</span><br><span class="line">                (<span class="string">r&#x27;\d&#123;6&#125;-\d&#123;2&#125;&#x27;</span>, <span class="string">&#x27;YYYYMM-DD&#x27;</span>),</span><br><span class="line">                (<span class="string">r&#x27;\d&#123;4&#125;-\d&#123;4&#125;&#x27;</span>, <span class="string">&#x27;YYYY-MMYY&#x27;</span>),</span><br><span class="line">            ]</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> pattern, format_type <span class="keyword">in</span> date_patterns:</span><br><span class="line">                <span class="keyword">match</span> = re.search(pattern, text)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">match</span>:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        date_str = <span class="keyword">match</span>.group(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> format_type == <span class="string">&#x27;YYYYMMDD&#x27;</span>:</span><br><span class="line">                            date_obj = datetime.strptime(date_str, <span class="string">&#x27;%Y%m%d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">elif</span> format_type == <span class="string">&#x27;YYYY-MM-DD&#x27;</span>:</span><br><span class="line">                            date_obj = datetime.strptime(date_str, <span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">elif</span> format_type == <span class="string">&#x27;YYYYMM-DD&#x27;</span>:</span><br><span class="line">                            <span class="comment"># 处理类似&quot;202005-20&quot;的格式</span></span><br><span class="line">                            year = <span class="built_in">int</span>(date_str[:<span class="number">4</span>])</span><br><span class="line">                            month = <span class="built_in">int</span>(date_str[<span class="number">4</span>:<span class="number">6</span>])</span><br><span class="line">                            day = <span class="built_in">int</span>(date_str[<span class="number">7</span>:<span class="number">9</span>])</span><br><span class="line">                            date_obj = datetime(year, month, day)</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">elif</span> format_type == <span class="string">&#x27;YYYY-MMYY&#x27;</span>:</span><br><span class="line">                            <span class="comment"># 处理类似&quot;2020-0520&quot;的格式</span></span><br><span class="line">                            year = <span class="built_in">int</span>(date_str[:<span class="number">4</span>])</span><br><span class="line">                            month = <span class="built_in">int</span>(date_str[<span class="number">5</span>:<span class="number">7</span>])</span><br><span class="line">                            day = <span class="built_in">int</span>(date_str[<span class="number">7</span>:<span class="number">9</span>])</span><br><span class="line">                            date_obj = datetime(year, month, day)</span><br><span class="line"></span><br><span class="line">                        <span class="comment"># 验证日期有效性</span></span><br><span class="line">                        <span class="keyword">if</span> date_obj &lt;= datetime.now():</span><br><span class="line">                            standardized_date = date_obj.strftime(<span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line">                            <span class="comment"># 替换文本中的日期部分</span></span><br><span class="line">                            text = text.replace(date_str, standardized_date)</span><br><span class="line">                            flag = <span class="literal">True</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="comment"># 可以在这里添加日志记录</span></span><br><span class="line">                        <span class="comment"># print(f&quot;日期解析错误: &#123;e&#125;, 格式: &#123;format_type&#125;, 文本: &#123;date_str&#125;&quot;)</span></span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">return</span> (text, flag)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="API的开发及相关代码"><a href="#API的开发及相关代码" class="headerlink" title="API的开发及相关代码"></a>API的开发及相关代码</h2><h3 id="需要下载的包"><a href="#需要下载的包" class="headerlink" title="需要下载的包"></a>需要下载的包</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install &quot;fastapi[all]&quot;</span><br><span class="line">pip install &quot;uvicorn[standard]&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="后端运行代码"><a href="#后端运行代码" class="headerlink" title="后端运行代码"></a>后端运行代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI, File, UploadFile, Form</span><br><span class="line"><span class="keyword">from</span> fastapi.responses <span class="keyword">import</span> JSONResponse</span><br><span class="line"><span class="keyword">import</span> uvicorn</span><br><span class="line"><span class="keyword">import</span> tools.infer.utility <span class="keyword">as</span> utility</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> tools.infer.predict_system <span class="keyword">import</span> main</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> fastapi.responses <span class="keyword">import</span> Response</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.post(<span class="params"><span class="string">&quot;/upload_image&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">upload_image</span>(<span class="params">image: UploadFile = File(<span class="params">...</span>)</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    上传图片，保存图片，并对图片进行灰度处理</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 读取上传的图片数据</span></span><br><span class="line">        image_data = <span class="keyword">await</span> image.read()</span><br><span class="line">        <span class="comment"># 保存上传的图片到upload目录</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&quot;./upload/<span class="subst">&#123;image.filename&#125;</span>&quot;</span>, <span class="string">&quot;wb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(image_data)  <span class="comment"># 保存上传的图片</span></span><br><span class="line">        args = utility.parse_args()</span><br><span class="line">        <span class="comment"># 设置文件路径</span></span><br><span class="line">        args.image_dir = <span class="string">f&quot;./upload/<span class="subst">&#123;image.filename&#125;</span>&quot;</span></span><br><span class="line">        args.draw_img_save_dir = <span class="string">f&quot;./upload/result/<span class="subst">&#123;image.filename&#125;</span>&quot;</span></span><br><span class="line">        <span class="keyword">if</span> args.use_mp:</span><br><span class="line">            p_list = []</span><br><span class="line">            total_process_num = args.total_process_num</span><br><span class="line">            <span class="keyword">for</span> process_id <span class="keyword">in</span> <span class="built_in">range</span>(total_process_num):</span><br><span class="line">                cmd = (</span><br><span class="line">                        [sys.executable, <span class="string">&quot;-u&quot;</span>]</span><br><span class="line">                        + sys.argv</span><br><span class="line">                        + [<span class="string">&quot;--process_id=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(process_id), <span class="string">&quot;--use_mp=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="literal">False</span>)]</span><br><span class="line">                )</span><br><span class="line">                p = subprocess.Popen(cmd, stdout=sys.stdout, stderr=sys.stdout)</span><br><span class="line">                p_list.append(p)</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> p_list:</span><br><span class="line">                p.wait()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result = main(args)</span><br><span class="line">        result_list = [<span class="string">&#x27;号牌号码&#x27;</span>,<span class="string">&#x27;车辆类型&#x27;</span>,<span class="string">&#x27;所有人&#x27;</span>,<span class="string">&#x27;使用性质&#x27;</span>,<span class="string">&#x27;品牌型号&#x27;</span>,<span class="string">&#x27;车辆识别代号&#x27;</span>,<span class="string">&#x27;发动机号码&#x27;</span>,<span class="string">&#x27;注册日期&#x27;</span>]</span><br><span class="line">        <span class="keyword">if</span> result <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> JSONResponse(</span><br><span class="line">                status_code=<span class="number">400</span>,</span><br><span class="line">                content=&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;error&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="string">&quot;无法处理上传的图片&quot;</span>&#125;</span><br><span class="line">            )</span><br><span class="line">        <span class="comment"># 格式化JSON输出</span></span><br><span class="line">        content = &#123;</span><br><span class="line">            <span class="string">&quot;original_image&quot;</span>: image.filename,</span><br><span class="line">            <span class="string">&quot;processed_result&quot;</span>: &#123;<span class="string">&#x27;号牌号码&#x27;</span>: result[<span class="string">&#x27;号牌号码&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;车辆类型&#x27;</span>: result[<span class="string">&#x27;车辆类型&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;所有人&#x27;</span>: result[<span class="string">&#x27;所有人&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;使用性质&#x27;</span>: result[<span class="string">&#x27;使用性质&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;品牌型号&#x27;</span>: result[<span class="string">&#x27;品牌型号&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;车辆识别代号&#x27;</span>: result[<span class="string">&#x27;车辆识别代号&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;发动机号码&#x27;</span>: result[<span class="string">&#x27;发动机号码&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;注册日期&#x27;</span>: result[<span class="string">&#x27;注册日期&#x27;</span>],</span><br><span class="line">                                 <span class="string">&#x27;燃料类型&#x27;</span>: result[<span class="string">&#x27;燃料类型&#x27;</span>]&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        formatted_json = json.dumps(content, indent=<span class="number">4</span>, ensure_ascii=<span class="literal">False</span>, separators=(<span class="string">&#x27;,&#x27;</span>, <span class="string">&#x27;: &#x27;</span>))</span><br><span class="line">        <span class="keyword">return</span> Response(content=formatted_json, media_type=<span class="string">&quot;application/json&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> JSONResponse(</span><br><span class="line">            status_code=<span class="number">500</span>,</span><br><span class="line">            content=&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;error&quot;</span>, <span class="string">&quot;message&quot;</span>: <span class="string">f&quot;处理图片时出错: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&quot;</span>&#125;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选的：添加一个健康检查端点</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/ifrun&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">root</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;message&quot;</span>: <span class="string">&quot;图片处理API服务运行中&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/health&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">health_check</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;healthy&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    uvicorn.run(app, host=<span class="string">&quot;0.0.0.0&quot;</span>, port=<span class="number">8000</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端输入"><a href="#客户端输入" class="headerlink" title="客户端输入"></a>客户端输入</h3><blockquote>
+<p>curl -X POST “<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/upload_image">http://127.0.0.1:8000/upload_image</a>“ \ -F “image&#x3D;@F:&#x2F;WorkProject&#x2F;OCR-VL&#x2F;Dataset&#x2F;test&#x2F;ocr_temp1.jpg”</p>
+</blockquote>
+<p>环境打包</p>
+<blockquote>
+<p>conda env export &gt; environment.yml</p>
+</blockquote>
+<hr>
+<h2 id="Docker打包"><a href="#Docker打包" class="headerlink" title="Docker打包"></a>Docker打包</h2><h3 id="Dockerfile的构建"><a href="#Dockerfile的构建" class="headerlink" title="Dockerfile的构建"></a>Dockerfile的构建</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.9-slim</span><br><span class="line"></span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line">COPY requirements.txt .</span><br><span class="line">RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">RUN pip install paddlepaddle==3.2.2 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/</span><br><span class="line"></span><br><span class="line">COPY . .</span><br><span class="line"></span><br><span class="line">EXPOSE 5000</span><br><span class="line"></span><br><span class="line">CMD [&quot;python&quot;, &quot;api.py&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;5000&quot;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h3><p>在dockerfile文件夹下打开命令行运行</p>
+<blockquote>
+<p>docker build -t my-python-app .<br>&#x2F;&#x2F;运行容器<br>docker run -d -p 5000:5000 –name my-app my-python-app</p>
+</blockquote>
+<hr>
+<h2 id="其他方式实现的行驶证OCR"><a href="#其他方式实现的行驶证OCR" class="headerlink" title="其他方式实现的行驶证OCR"></a>其他方式实现的行驶证OCR</h2><h3 id="基于dify的行驶证OCR"><a href="#基于dify的行驶证OCR" class="headerlink" title="基于dify的行驶证OCR"></a>基于dify的行驶证OCR</h3><p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Everly_/article/details/151334075">https://blog.csdn.net/Everly_/article/details/151334075</a></p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation">
+        <a href="/2026/01/14/hello-world/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" #.">
+                    未分类
+                </a>
+            </div>
+            <h5>
+                <a href="/2026/01/14/hello-world/" class="trm-anima-link">
+                    Hello World
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>26/01/14</li>
+                <li>23:14</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2026 - 2026</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">萝卜煎饺</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v8.1.1
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.2.7
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item blog-run-long"></div>
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.7"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+			<script src="/js/plugins/danmu.js?v=2.2.7"></script>
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.7"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
