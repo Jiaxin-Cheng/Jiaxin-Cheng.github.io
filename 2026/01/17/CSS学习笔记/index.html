@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="CSS学习笔记 目录  CSS (Cascading Style Sheets，层叠样式表)，是一种用来为结构化文档（如 HTML 文档或 XML 应用）添加样式（字体、间距和颜色等）的计算机语言，CSS 文件扩展名为 .css。 一、基本用法语法：  选择器 {属性：值；属性：值}  注释：  &#x2F;*注释内容*&#x2F;  两种选择器     id选择器  class 选择器 特定id使用class选择器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS学习总结">
+<meta property="og:url" content="https://jiaxin-cheng.github.io/2026/01/17/CSS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="ChengJiaxin&#39;Blog">
+<meta property="og:description" content="CSS学习笔记 目录  CSS (Cascading Style Sheets，层叠样式表)，是一种用来为结构化文档（如 HTML 文档或 XML 应用）添加样式（字体、间距和颜色等）的计算机语言，CSS 文件扩展名为 .css。 一、基本用法语法：  选择器 {属性：值；属性：值}  注释：  &#x2F;*注释内容*&#x2F;  两种选择器     id选择器  class 选择器 特定id使用class选择器">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-01-17T12:37:03.000Z">
+<meta property="article:modified_time" content="2026-01-17T13:26:26.454Z">
+<meta property="article:author" content="Cheng jiaxin">
+<meta name="twitter:card" content="summary">
+
+    <meta name="keywords" content="CSS">
+
+
+<title >CSS学习总结</title>
+
+<!-- Favicon -->
+
+    <link href='/image/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/image/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"jiaxin-cheng.github.io","author":"Cheng jiaxin","root":"/","typed_text":["Web Developer"],"theme_version":"2.2.7","theme":{"switch":true,"default":"auto"},"favicon":{"logo":"image/nike.jpg","icon16":"image/nike.jpg","icon32":"image/nike.jpg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦！","wnbmanifest":"/site.webmanifest","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"10/01/2026 17:00:00","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":true,"el":".trm-banner","avatar":true,"speed":80,"height":null,"gapWidth":30,"gapHeight":40,"delayRange":5000,"align":null,"mode":"half"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh-hans"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2026-01-17 21:26:26"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.7" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/image/nike.jpg">
+    
+    
+        <div class="trm-logo-text">
+            煎饺<span>萝卜</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/categories/" target="">
+                            标签分类
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/projects/" target="">
+                    项目
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/images/" target="">
+                    相册
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            Hi my new friend!
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            CSS学习总结
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2026
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/image/nike.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        萝卜煎饺
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/Jiaxin-Cheng.git.io" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://github.com" title="facebook" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-facebook"></i>
+        </a>
+    
+        <a href="https://github.com" title="Twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+        <a href="https://github.com" title="youtube" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-youtube"></i>
+        </a>
+    
+        <a href="https://github.com" title="instagram" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-instagram"></i>
+        </a>
+    
+        <a href="https://github.com" title="qq" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://github.com" title="wechat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="https://github.com" title="zhihu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://github.com" title="weibo" rel="nofollow" target="_blank">
+            <i class="iconfont fab weibo"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                25
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                城市:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星球:
+            </div>
+            <div class="trm-label trm-label-light">
+                火星
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:1768900816@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            20:37
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Cheng Jiaxin
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="CSS学习笔记"><a href="#CSS学习笔记" class="headerlink" title="CSS学习笔记"></a><center>CSS学习笔记</center></h1><hr>
+<p>目录</p>
+<hr>
+<p>CSS (Cascading Style Sheets，层叠样式表)，是一种用来为结构化文档（如 HTML 文档或 XML 应用）添加样式（字体、间距和颜色等）的计算机语言，CSS 文件扩展名为 .css。</p>
+<h2 id="一、基本用法"><a href="#一、基本用法" class="headerlink" title="一、基本用法"></a>一、基本用法</h2><p>语法：</p>
+<blockquote>
+<p>选择器 {属性：值；属性：值}</p>
+</blockquote>
+<p>注释：</p>
+<blockquote>
+<p><code>/*</code>注释内容<code>*/</code></p>
+</blockquote>
+<p>两种选择器</p>
+<table>
+<tr>
+<th> </th>
+<td>id选择器</td>
+<td> class 选择器</td>
+<td>特定id使用class选择器</td>
+</tr>
+
+<tr>
+<th>描述</th>
+<td>描述特定id元素样式，id选择器以`#`来定义</td>
+<td>描述一组元素样式，类选择器以一个点 `. `号显示</td>
+</tr>
+
+<tr>
+<th>示例</th>
+<td><code>
+#para1
+{
+	text-align:center;
+	color:red;
+}
+</code></td>
+
+<td><code>
+.center {text-align:center;}
+</code></td>
+
+<td>所有的 p 元素使用 class="center" 让该元素的文本居中
+<code>
+p.center {text-align:center;}
+</code></td>
+</tr>
+</table>
+
+<p>CSS中选择器<b><code>:</code></b>和<b><code>.</code></b>的区别:</p>
+<p><b><code>.</code></b>用于选择具有特定class属性的元素<br><b><code>:</code></b>用于选择元素的特定状态或位置</p>
+<hr>
+<h2 id="二、CSS文件的创建"><a href="#二、CSS文件的创建" class="headerlink" title="二、CSS文件的创建"></a>二、CSS文件的创建</h2><p>CSS文件创建方式有三种</p>
+<ul>
+<li>外部样式表(External style sheet)</li>
+<li>内部样式表(Internal style sheet)</li>
+<li>内联样式(Inline style)</li>
+</ul>
+<h3 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h3><p>应用于很多页面时，通过改变一个文件来改变整个站点的外观，每个页面使用 <code>&lt;link&gt;</code>标签链接到样式表。<code>&lt;link&gt;</code> 标签在（文档的）头部.</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;mystyle.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h3><p>当单个文档需要特殊的样式时，就应该使用内部样式表。你可以使用 <code>&lt;style&gt;</code>标签在文档头部定义内部样式。</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">hr &#123;<span class="attribute">color</span>:sienna;&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-tag">p</span> &#123;<span class="attribute">margin-left</span>:<span class="number">20px</span>;&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-tag">body</span> &#123;<span class="attribute">background-image</span>:<span class="built_in">url</span>(<span class="string">&quot;images/back40.gif&quot;</span>);&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><p>在标签中使用style属性。<br>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;color:sienna;margin-left:20px&quot;</span>&gt;</span>这是一个段落。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多重样式"><a href="#多重样式" class="headerlink" title="多重样式"></a>多重样式</h3><p>即同一个属性被不同样式表定义。</p>
+<p>优先级：<br>内联样式 &gt; 内部样式&gt;外部样式 &gt; 浏览器默认样式</p>
+<hr>
+<h2 id="三、背景"><a href="#三、背景" class="headerlink" title="三、背景"></a>三、背景</h2><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">background-color</td>
+<td align="left">设置背景颜色</td>
+<td align="left"><code>body {background-color:#b0c4de;}</code></td>
+</tr>
+<tr>
+<td align="left">background-image</td>
+<td align="left">设置背景图像</td>
+<td align="left"><code>body {background-image:url(&#39;paper.gif&#39;);}</code></td>
+</tr>
+<tr>
+<td align="left">background-repeat</td>
+<td align="left">设置水平或垂直平铺</td>
+<td align="left"><code>body{background-image:url(&#39;gradient2.png&#39;);background-repeat:repeat-x;}</code></td>
+</tr>
+<tr>
+<td align="left">background-attachmen</td>
+<td align="left">背景图像是否固定或者随着页面的其余部分滚动</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">background-position</td>
+<td align="left">设置图像位置</td>
+<td align="left"><code>body{background-image:url(&#39;img_tree.png&#39;);background-repeat:no-repeat;background-position:right top;}</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、文本格式"><a href="#四、文本格式" class="headerlink" title="四、文本格式"></a>四、文本格式</h2><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">color</td>
+<td align="left">设置文本颜色</td>
+</tr>
+<tr>
+<td align="left">direction</td>
+<td align="left">设置文本方向</td>
+</tr>
+<tr>
+<td align="left">letter-spacing</td>
+<td align="left">设置字符间距</td>
+</tr>
+<tr>
+<td align="left">line-height</td>
+<td align="left">设置行高</td>
+</tr>
+<tr>
+<td align="left">text-align</td>
+<td align="left">对齐元素中的文本</td>
+</tr>
+<tr>
+<td align="left">text-decoration</td>
+<td align="left">向文本添加修饰</td>
+</tr>
+<tr>
+<td align="left">text-indent</td>
+<td align="left">缩进元素中文本的首行</td>
+</tr>
+<tr>
+<td align="left">text-shadow</td>
+<td align="left">设置文本阴影</td>
+</tr>
+<tr>
+<td align="left">text-transform</td>
+<td align="left">控制元素中的字母</td>
+</tr>
+<tr>
+<td align="left">unicode-bidi</td>
+<td align="left">设置或返回文本是否被重写</td>
+</tr>
+<tr>
+<td align="left">vertical-align</td>
+<td align="left">设置元素的垂直对齐</td>
+</tr>
+<tr>
+<td align="left">white-space</td>
+<td align="left">设置元素中空白的处理方式</td>
+</tr>
+<tr>
+<td align="left">word-spacing</td>
+<td align="left">设置字间距</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、字体"><a href="#五、字体" class="headerlink" title="五、字体"></a>五、字体</h2><p>如果字体系列的名称超过一个字，它必须用引号，如Font Family：”宋体”。多个字体系列是用一个逗号分隔指明。<br>示例：</p>
+<blockquote>
+<p>p{font-family:”Times New Roman”, Times, serif;}</p>
+</blockquote>
+<h3 id="斜体的属性"><a href="#斜体的属性" class="headerlink" title="斜体的属性"></a>斜体的属性</h3><p>p.normal {font-style:normal;}<br>p.italic {font-style:italic;}   &#x2F;使用倾斜字体<br>p.oblique {font-style:oblique;} &#x2F;使字体倾斜</p>
+<h3 id="常用属性"><a href="#常用属性" class="headerlink" title="常用属性"></a>常用属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">font</td>
+<td align="left">在一个声明中设置所有的字体属性</td>
+</tr>
+<tr>
+<td align="left">font-family</td>
+<td align="left">指定文本的字体系列</td>
+</tr>
+<tr>
+<td align="left">font-size</td>
+<td align="left">指定文本的字体大小</td>
+</tr>
+<tr>
+<td align="left">font-style</td>
+<td align="left">指定文本的字体样式</td>
+</tr>
+<tr>
+<td align="left">font-variant</td>
+<td align="left">以小型大写字体或者正常字体显示文本</td>
+</tr>
+<tr>
+<td align="left">font-weight</td>
+<td align="left">指定字体的粗细</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、链接"><a href="#六、链接" class="headerlink" title="六、链接"></a>六、链接</h2><p>常用属性</p>
+<ul>
+<li>a:link - 正常，未访问过的链接</li>
+<li>a:visited - 用户已访问过的链接</li>
+<li>a:hover - 当用户鼠标放在链接上时</li>
+<li>a:active - 链接被点击的那一刻</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">background-color</span>:<span class="number">#B2FF99</span>;&#125;    <span class="comment">/* 未访问链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">background-color</span>:<span class="number">#FFFF85</span>;&#125; <span class="comment">/* 已访问链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;<span class="attribute">background-color</span>:<span class="number">#FF704D</span>;&#125;   <span class="comment">/* 鼠标移动到链接上 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">background-color</span>:<span class="number">#FF704D</span>;&#125;  <span class="comment">/* 鼠标点击时 */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="七、列表"><a href="#七、列表" class="headerlink" title="七、列表"></a>七、列表</h2><p>作用：</p>
+<ul>
+<li>设置列表项为有序列表</li>
+<li>设置列表项为无序列表</li>
+<li>设置列表项为图像</li>
+</ul>
+<p>使用list-style-type属性指定列表项标记的类型：<br>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span><span class="selector-class">.a</span> &#123;<span class="attribute">list-style-type</span>: circle;&#125; <span class="comment">/* 无序列表 */</span></span><br><span class="line"><span class="selector-tag">ul</span><span class="selector-class">.b</span> &#123;<span class="attribute">list-style-type</span>: square;&#125;</span><br><span class="line"> </span><br><span class="line"><span class="selector-tag">ol</span><span class="selector-class">.c</span> &#123;<span class="attribute">list-style-type</span>: upper-roman;&#125; <span class="comment">/* 有序列表 */</span></span><br><span class="line"><span class="selector-tag">ol</span><span class="selector-class">.d</span> &#123;<span class="attribute">list-style-type</span>: lower-alpha;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用list-style-image属性指定列表项为图像：<br>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">list-style-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;sqpurple.gif&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用列表属性"><a href="#常用列表属性" class="headerlink" title="常用列表属性"></a>常用列表属性</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">list-style</td>
+<td align="left">简写属性。用于把所有用于列表的属性设置于一个声明中</td>
+</tr>
+<tr>
+<td align="left">list-style-image</td>
+<td align="left">将图像设置为列表项标志</td>
+</tr>
+<tr>
+<td align="left">list-style-position</td>
+<td align="left">设置列表中列表项标志的位置</td>
+</tr>
+<tr>
+<td align="left">list-style-type</td>
+<td align="left">设置列表项标志的类型</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、表格"><a href="#八、表格" class="headerlink" title="八、表格"></a>八、表格</h2><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">border</td>
+<td align="left">指定CSS表格边框</td>
+<td align="left"><code>table, th, td{border: 1px solid black;}</code></td>
+</tr>
+<tr>
+<td align="left">border-collapse</td>
+<td align="left">设置表格的边框是否被折叠成一个单一的边框或隔开</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">with和height</td>
+<td align="left">设置表格宽度和高度</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">text-align</td>
+<td align="left">设置文本对齐和垂直属性</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">padding</td>
+<td align="left">设置表格填充属性</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、页面边框"><a href="#九、页面边框" class="headerlink" title="九、页面边框"></a>九、页面边框</h2><p>边框属性：</p>
+<ul>
+<li>Margin(外边距) - 清除边框外的区域，外边距是透明的。</li>
+<li>Border(边框) - 围绕在内边距和内容外的边框。</li>
+<li>Padding(内边距) - 清除内容周围的区域，内边距是透明的。</li>
+<li>Content(内容) - 盒子的内容，显示文本和图像。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">220px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid gray;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="边框属性-border"><a href="#边框属性-border" class="headerlink" title="边框属性(border)"></a>边框属性(border)</h3><h4 id="边框样式"><a href="#边框样式" class="headerlink" title="边框样式"></a>边框样式</h4><p>border-style</p>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">dotted</td>
+<td align="left">定义点状边框</td>
+</tr>
+<tr>
+<td align="left">dashed</td>
+<td align="left">定义虚线边框</td>
+</tr>
+<tr>
+<td align="left">solid</td>
+<td align="left">定义实线边框</td>
+</tr>
+<tr>
+<td align="left">double</td>
+<td align="left">定义双线边框</td>
+</tr>
+<tr>
+<td align="left">groove</td>
+<td align="left">定义三维沟槽边框</td>
+</tr>
+<tr>
+<td align="left">ridge</td>
+<td align="left">定义三维脊状边框</td>
+</tr>
+<tr>
+<td align="left">inset</td>
+<td align="left">定义三维嵌入边框</td>
+</tr>
+<tr>
+<td align="left">outset</td>
+<td align="left">定义三维突出边框</td>
+</tr>
+<tr>
+<td align="left">none</td>
+<td align="left">定义无边框</td>
+</tr>
+<tr>
+<td align="left">hidden</td>
+<td align="left">定义隐藏边框</td>
+</tr>
+</tbody></table>
+<h4 id="边框宽度"><a href="#边框宽度" class="headerlink" title="边框宽度"></a>边框宽度</h4><p>通过border-with指定边框宽度，可以指定长度值，比如 2px 或 0.1em(单位为 px, pt, cm, em 等)，或者使用 3 个关键字之一，它们分别是 thick 、medium（默认值） 和 thin。</p>
+<h4 id="边框颜色"><a href="#边框颜色" class="headerlink" title="边框颜色"></a>边框颜色</h4><p>border-color属性用于设置边框的颜色：</p>
+<ul>
+<li>name - 指定颜色的名称，如 “red”</li>
+<li>RGB - 指定 RGB 值, 如<code>rgb(255,0,0)</code></li>
+<li>Hex - 指定16进制值, 如 “#ff0000”</li>
+</ul>
+<p>注意：<br> border-color单独使用是不起作用的，必须得先使用border-style来设置边框样式。</p>
+<h4 id="指定侧面不同的边框"><a href="#指定侧面不同的边框" class="headerlink" title="指定侧面不同的边框"></a>指定侧面不同的边框</h4><p>示例:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">border-top-style</span>:dotted;</span><br><span class="line">    <span class="attribute">border-right-style</span>:solid;</span><br><span class="line">    <span class="attribute">border-bottom-style</span>:dotted;</span><br><span class="line">    <span class="attribute">border-left-style</span>:solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="简写属性"><a href="#简写属性" class="headerlink" title="简写属性"></a>简写属性</h4><ul>
+<li>border-width</li>
+<li>border-style (required)</li>
+<li>border-color</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">border</span>:<span class="number">5px</span> solid red;</span><br></pre></td></tr></table></figure>
+
+<h4 id="属性参考"><a href="#属性参考" class="headerlink" title="属性参考"></a>属性参考</h4><p><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-border.html">参考链接</a></p>
+<h3 id="轮廓属性-outline"><a href="#轮廓属性-outline" class="headerlink" title="轮廓属性(outline)"></a>轮廓属性(outline)</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">outline</td>
+<td align="left">在一个声明中设置所有的轮廓属性</td>
+<td align="left">outline-color<br>outline-style<br>outline-width<br>inherit</td>
+</tr>
+<tr>
+<td align="left">outline-color</td>
+<td align="left">设置轮廓颜色</td>
+<td align="left">color-name<br>hex-number<br>rgb-number<br>invert<br>inherit</td>
+</tr>
+<tr>
+<td align="left">outline-style</td>
+<td align="left">设置轮廓样式</td>
+<td align="left">none<br>dotted<br>dashed<br>solid<br>double<br>groove<br>ridge<br>inset<br>outset<br>inherit</td>
+</tr>
+<tr>
+<td align="left">outline-with</td>
+<td align="left">设置轮廓宽度</td>
+<td align="left">thin<br>medium<br>thick<br>length<br>inherit</td>
+</tr>
+</tbody></table>
+<h3 id="外边距-margin"><a href="#外边距-margin" class="headerlink" title="外边距(margin)"></a>外边距(margin)</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">margin</td>
+<td align="left">简写属性</td>
+</tr>
+<tr>
+<td align="left">margin-bottom</td>
+<td align="left">设置元素的下外边距</td>
+</tr>
+<tr>
+<td align="left">margin-left</td>
+<td align="left">设置元素的左外边距</td>
+</tr>
+<tr>
+<td align="left">margin-right</td>
+<td align="left">设置元素的右外边距</td>
+</tr>
+<tr>
+<td align="left">margin-top</td>
+<td align="left">设置元素的上外边距</td>
+</tr>
+</tbody></table>
+<h3 id="填充-padding"><a href="#填充-padding" class="headerlink" title="填充(padding)"></a>填充(padding)</h3><table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">padding</td>
+<td align="left">简写属性</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">padding-bottom</td>
+<td align="left">设置元素的下内边距</td>
+<td align="left">padding-top:25px</td>
+</tr>
+<tr>
+<td align="left">padding-left</td>
+<td align="left">设置元素的左内边距</td>
+<td align="left">padding-bottom:25px</td>
+</tr>
+<tr>
+<td align="left">padding-right</td>
+<td align="left">设置元素的右内边距</td>
+<td align="left">padding-right:50px</td>
+</tr>
+<tr>
+<td align="left">padding-top</td>
+<td align="left">设置元素的上内边距</td>
+<td align="left">padding-left:50px</td>
+</tr>
+</tbody></table>
+<hr>
+<p>分组和嵌套</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">分组选择器</th>
+<th align="left">嵌套选择器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">实例</td>
+<td align="left">h1,h2,p{color:green;}</td>
+<td align="left">1. p{ }: 为所有 p 元素指定一个样式。<br> 2. .marked{ }:为所有 class&#x3D;”marked”的元素指定一个样式。<br>3. .marked p{}:为所有class&#x3D;”marked”元素内的p元素指定一个样式。<br> 4. p.marked{ }: 为所有class&#x3D;”marked”的p元素指定一个样式。</td>
+</tr>
+</tbody></table>
+<hr>
+<p>CSS尺寸属性</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>height</td>
+<td>设置元素的高度。</td>
+</tr>
+<tr>
+<td>line-height</td>
+<td>设置行高。</td>
+</tr>
+<tr>
+<td>max-height</td>
+<td>设置元素的最大高度。</td>
+</tr>
+<tr>
+<td>max-width</td>
+<td>设置元素的最大宽度。</td>
+</tr>
+<tr>
+<td>min-height</td>
+<td>设置元素的最小高度。</td>
+</tr>
+<tr>
+<td>min-width</td>
+<td>设置元素的最小宽度。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>设置元素的宽度。</td>
+</tr>
+</tbody></table>
+<hr>
+<p>Display(显示) 与 Visibility（可见性）</p>
+<table>
+<thead>
+<tr>
+<th>Display</th>
+<th>Visibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>display:none可以隐藏某个元素，且隐藏的元素不会占用任何空间。</td>
+<td>visibility:hidden可以隐藏某个元素，但隐藏的元素仍需占用与未隐藏之前一样的空间</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>内联</th>
+<th>块</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内联元素只需要必要的宽度，不强制换行。</td>
+<td>块元素是一个元素，占用了全部宽度，在前后都是换行符</td>
+</tr>
+<tr>
+<td>li {<font style="color:red">display:inline;</font>}</td>
+<td>span {<font style="color:red">display:block;</font>}</td>
+</tr>
+</tbody></table>
+<hr>
+<table>
+<thead>
+<tr>
+<th>position属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>static</td>
+<td>HTML 元素的默认值，即没有定位，遵循正常的文档流对象;<br>静态定位的元素不会受到 top, bottom, left, right影响。</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>元素的位置相对于浏览器窗口是固定位置；<br>即使窗口是滚动的它也不会移动；<br>Fixed定位使元素的位置与文档流无关，因此不占据空间；<br>Fixed定位的元素和其他元素重叠。</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>相对定位元素的定位是相对其正常位置;<br>移动相对定位元素，但它原本所占的空间不会改变;<br>相对定位元素经常被用来作为绝对定位元素的容器块。</td>
+</tr>
+<tr>
+<td>absolute</td>
+<td>绝对定位的元素的位置相对于最近的已定位父元素；如果元素没有已定位的父元素，那么它的位置相对于<code>&lt;html&gt;</code>；<br>absolute 定位使元素的位置与文档流无关，因此不占据空间；<br>absolute 定位的元素和其他元素重叠。</td>
+</tr>
+<tr>
+<td>sticky</td>
+<td>粘性定位的元素是依赖于用户的滚动，在 position:relative 与 position:fixed 定位之间切换</td>
+</tr>
+</tbody></table>
+<p>元素的定位与文档流无关，所以它们可以覆盖页面上的其它元素。</p>
+<p>z-index属性指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面）。</p>
+<hr>
+<p>overflow 属性只工作于指定高度的块元素上。</p>
+<table>
+<thead>
+<tr>
+<th>overflow属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>visible</td>
+<td>默认值。内容不会被修剪，会呈现在元素框之外。</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>内容会被修剪，并且其余内容是不可见的。</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。</td>
+</tr>
+<tr>
+<td>auto</td>
+<td>如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>规定应该从父元素继承overflow属性的值。</td>
+</tr>
+</tbody></table>
+<hr>
+<p>浮动和清除设置</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>clear</td>
+<td>指定不允许元素周围有浮动元素</td>
+<td>left<br>right<br>both<br>none<br>inherit</td>
+</tr>
+<tr>
+<td>float</td>
+<td>指定一个盒子（元素）是否可以浮动</td>
+<td>left<br>right<br>none<br>inherit</td>
+</tr>
+</tbody></table>
+<hr>
+<p>元素文本对齐设置</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>margin: auto</td>
+<td>元素居中对齐</td>
+<td>如果没有设置 width 属性(或设置 100%)，居中对齐将不起作用</td>
+</tr>
+<tr>
+<td>text-align: center</td>
+<td>文本居中对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>position: absolute</td>
+<td>左右对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>float</td>
+<td>左右对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>padding</td>
+<td>垂直居中对齐</td>
+<td></td>
+</tr>
+<tr>
+<td>padding 和 text-align: center</td>
+<td>水平和垂直都居中</td>
+<td></td>
+</tr>
+<tr>
+<td>line-height</td>
+<td>垂直居中</td>
+<td></td>
+</tr>
+<tr>
+<td>position 和 transform</td>
+<td>垂直居中</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<p>组合选择符</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>描述</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code> </code></td>
+<td>后代元素选择器，用于选取某元素的后代元素</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>子元素选择器，只能选择作为某元素直接&#x2F;一级子元素的元素</td>
+<td></td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>相邻兄弟选择器，可选择紧接在另一元素后的元素，且二者有相同父元素</td>
+<td></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>后续兄弟选择器，选取所有指定元素之后的相邻兄弟元素</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>伪类</strong>，添加一些选择器的特殊效果<br>语法：</p>
+<blockquote>
+<p>selector:pseudo-class {property:value;}<br>selector.class:pseudo-class {property:value;} #css类的伪类语法</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-pseudo-classes.html">所有CSS伪类&#x2F;元素查看</a></p>
+<p><strong>伪元素</strong>，是一种特殊的选择器，它可以在不改变 HTML 结构的情况下对页面元素的特定部分进行样式设置。<br>伪元素语法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector::pseudo-element &#123;</span><br><span class="line">    property: value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CSS类的伪元素语法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector<span class="selector-class">.class</span>::pseudo-element &#123;</span><br><span class="line">    property: value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/css/css-pseudo-elements.html">所有CSS伪类&#x2F;元素查看</a></p>
+<hr>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2026/01/17/Markdown%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/image/judy.png">
+                </span>
+                <h6 class="trm-op-title">Markdown学习总结</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>26/01/17</li>
+                <li>20:37</li>
+                <li>技术</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2026/01/14/hello-world/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/image/judy.png">
+                </span>
+                <h6 class="trm-op-title">Hello World</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>26/01/14</li>
+                <li>23:14</li>
+                <li>记录</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2026 - 2026</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">萝卜煎饺</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v8.1.1
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.2.7
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item blog-run-long"></div>
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+    <div id="post-toc" class="trm-post-toc">
+      <div class="trm-post-toc-header">
+        目录导航
+				<span id="post-toc-top">
+					置顶
+				</span>
+      </div>
+      <div class="trm-post-toc-content">
+        <ol class="trm-toc"><li class="trm-toc-item trm-toc-level-1" title="CSS学习笔记"><a rel="nofollow" class="trm-toc-link" href="#CSS学习笔记"><span class="trm-toc-number">1.</span> <span class="trm-toc-text">CSS学习笔记</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-2" title="一、基本用法"><a rel="nofollow" class="trm-toc-link" href="#一、基本用法"><span class="trm-toc-number">1.1.</span> <span class="trm-toc-text">一、基本用法</span></a></li><li class="trm-toc-item trm-toc-level-2" title="二、CSS文件的创建"><a rel="nofollow" class="trm-toc-link" href="#二、CSS文件的创建"><span class="trm-toc-number">1.2.</span> <span class="trm-toc-text">二、CSS文件的创建</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="外部样式表"><a rel="nofollow" class="trm-toc-link" href="#外部样式表"><span class="trm-toc-number">1.2.1.</span> <span class="trm-toc-text">外部样式表</span></a></li><li class="trm-toc-item trm-toc-level-3" title="内部样式表"><a rel="nofollow" class="trm-toc-link" href="#内部样式表"><span class="trm-toc-number">1.2.2.</span> <span class="trm-toc-text">内部样式表</span></a></li><li class="trm-toc-item trm-toc-level-3" title="内联样式"><a rel="nofollow" class="trm-toc-link" href="#内联样式"><span class="trm-toc-number">1.2.3.</span> <span class="trm-toc-text">内联样式</span></a></li><li class="trm-toc-item trm-toc-level-3" title="多重样式"><a rel="nofollow" class="trm-toc-link" href="#多重样式"><span class="trm-toc-number">1.2.4.</span> <span class="trm-toc-text">多重样式</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="三、背景"><a rel="nofollow" class="trm-toc-link" href="#三、背景"><span class="trm-toc-number">1.3.</span> <span class="trm-toc-text">三、背景</span></a></li><li class="trm-toc-item trm-toc-level-2" title="四、文本格式"><a rel="nofollow" class="trm-toc-link" href="#四、文本格式"><span class="trm-toc-number">1.4.</span> <span class="trm-toc-text">四、文本格式</span></a></li><li class="trm-toc-item trm-toc-level-2" title="五、字体"><a rel="nofollow" class="trm-toc-link" href="#五、字体"><span class="trm-toc-number">1.5.</span> <span class="trm-toc-text">五、字体</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="斜体的属性"><a rel="nofollow" class="trm-toc-link" href="#斜体的属性"><span class="trm-toc-number">1.5.1.</span> <span class="trm-toc-text">斜体的属性</span></a></li><li class="trm-toc-item trm-toc-level-3" title="常用属性"><a rel="nofollow" class="trm-toc-link" href="#常用属性"><span class="trm-toc-number">1.5.2.</span> <span class="trm-toc-text">常用属性</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="六、链接"><a rel="nofollow" class="trm-toc-link" href="#六、链接"><span class="trm-toc-number">1.6.</span> <span class="trm-toc-text">六、链接</span></a></li><li class="trm-toc-item trm-toc-level-2" title="七、列表"><a rel="nofollow" class="trm-toc-link" href="#七、列表"><span class="trm-toc-number">1.7.</span> <span class="trm-toc-text">七、列表</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="常用列表属性"><a rel="nofollow" class="trm-toc-link" href="#常用列表属性"><span class="trm-toc-number">1.7.1.</span> <span class="trm-toc-text">常用列表属性</span></a></li></ol></li><li class="trm-toc-item trm-toc-level-2" title="八、表格"><a rel="nofollow" class="trm-toc-link" href="#八、表格"><span class="trm-toc-number">1.8.</span> <span class="trm-toc-text">八、表格</span></a></li><li class="trm-toc-item trm-toc-level-2" title="九、页面边框"><a rel="nofollow" class="trm-toc-link" href="#九、页面边框"><span class="trm-toc-number">1.9.</span> <span class="trm-toc-text">九、页面边框</span></a><ol class="trm-toc-child"><li class="trm-toc-item trm-toc-level-3" title="边框属性(border)"><a rel="nofollow" class="trm-toc-link" href="#边框属性-border"><span class="trm-toc-number">1.9.1.</span> <span class="trm-toc-text">边框属性(border)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="轮廓属性(outline)"><a rel="nofollow" class="trm-toc-link" href="#轮廓属性-outline"><span class="trm-toc-number">1.9.2.</span> <span class="trm-toc-text">轮廓属性(outline)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="外边距(margin)"><a rel="nofollow" class="trm-toc-link" href="#外边距-margin"><span class="trm-toc-number">1.9.3.</span> <span class="trm-toc-text">外边距(margin)</span></a></li><li class="trm-toc-item trm-toc-level-3" title="填充(padding)"><a rel="nofollow" class="trm-toc-link" href="#填充-padding"><span class="trm-toc-number">1.9.4.</span> <span class="trm-toc-text">填充(padding)</span></a></li></ol></li></ol></li></ol>
+      </div>
+    </div>
+
+            
+<div class="trm-fixed-container">
+    
+        <div class="trm-fixed-btn post-toc-btn" data-title="目录">
+            <i class="iconfont fas fa-th-list"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.7"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+			<script src="/js/plugins/danmu.js?v=2.2.7"></script>
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.7"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>

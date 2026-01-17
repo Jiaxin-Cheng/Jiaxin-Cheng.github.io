@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="&lt;!DOCTYPE html&gt;声明必须位于文档的第一行 中文网页需要使用&lt;m1·eta charset&#x3D;&quot;utf-8&quot;&gt;声明编码，否则会出现乱码 HTML是超文本标记语言   一、 html基础(一). 标题  &lt;h1&gt;这是一个标题&lt;&#x2F;h1&gt;  (二). 段落  &lt;p&gt;这是一个段落&lt;&#x2F;p&gt;  (三). 链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html5学习笔记">
+<meta property="og:url" content="https://jiaxin-cheng.github.io/2026/01/17/HTML5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="ChengJiaxin&#39;Blog">
+<meta property="og:description" content="&lt;!DOCTYPE html&gt;声明必须位于文档的第一行 中文网页需要使用&lt;m1·eta charset&#x3D;&quot;utf-8&quot;&gt;声明编码，否则会出现乱码 HTML是超文本标记语言   一、 html基础(一). 标题  &lt;h1&gt;这是一个标题&lt;&#x2F;h1&gt;  (二). 段落  &lt;p&gt;这是一个段落&lt;&#x2F;p&gt;  (三). 链">
+<meta property="og:locale">
+<meta property="article:published_time" content="2026-01-17T12:37:03.000Z">
+<meta property="article:modified_time" content="2026-01-17T12:56:58.952Z">
+<meta property="article:author" content="Cheng jiaxin">
+<meta name="twitter:card" content="summary">
+
+    <meta name="keywords" content="html">
+
+
+<title >html5学习笔记</title>
+
+<!-- Favicon -->
+
+    <link href='/image/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/image/nike.jpg?v=2.2.7' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"jiaxin-cheng.github.io","author":"Cheng jiaxin","root":"/","typed_text":["Web Developer"],"theme_version":"2.2.7","theme":{"switch":true,"default":"auto"},"favicon":{"logo":"image/nike.jpg","icon16":"image/nike.jpg","icon32":"image/nike.jpg","apple_touch_icon":null,"webmanifest":null,"visibilitychange":true,"hidden":"failure.ico","show_text":"(/≧▽≦/)咦！又好了！","hide_text":"(●—●)喔哟，崩溃啦！","wnbmanifest":"/site.webmanifest","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","sticky":"置顶","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"toc":{"post_title":true},"live_time":{"start_time":"10/01/2026 17:00:00","prefix":"博客已萌萌哒运行 undefined 天"},"danmu":{"enable":true,"el":".trm-banner","avatar":true,"speed":80,"height":null,"gapWidth":30,"gapHeight":40,"delayRange":5000,"align":null,"mode":"half"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh-hans"}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2026-01-17 20:56:58"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.2.7" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+
+ 
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" style="opacity: 0">
+            <!-- top bar -->
+            <header class="trm-top-bar">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/image/nike.jpg">
+    
+    
+        <div class="trm-logo-text">
+            煎饺<span>萝卜</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    主页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/archives/" target="">
+                    归档
+                </a>
+                
+                <ul>
+                    
+                    <li>
+                        <a  href="/categories/" target="">
+                            标签分类
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/projects/" target="">
+                    项目
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/images/" target="">
+                    相册
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a data-no-swup href="/links/" target="">
+                    友情链接
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            Hi my new friend!
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            html5学习笔记
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2026
+                                    </span>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <span id="scroll-triger" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </span>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div class="trm-page-sidebar col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card"> 
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/image/nike.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        萝卜煎饺
+    </h5>
+    
+        <div class="trm-label">
+            I`m
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com/Jiaxin-Cheng.git.io" title="github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+        <a href="https://github.com" title="facebook" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-facebook"></i>
+        </a>
+    
+        <a href="https://github.com" title="Twitter" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-twitter"></i>
+        </a>
+    
+        <a href="https://github.com" title="youtube" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-youtube"></i>
+        </a>
+    
+        <a href="https://github.com" title="instagram" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-instagram"></i>
+        </a>
+    
+        <a href="https://github.com" title="qq" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-qq"></i>
+        </a>
+    
+        <a href="https://github.com" title="wechat" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-weixin"></i>
+        </a>
+    
+        <a href="https://github.com" title="zhihu" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-zhihu"></i>
+        </a>
+    
+        <a href="https://github.com" title="weibo" rel="nofollow" target="_blank">
+            <i class="iconfont fab weibo"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                年龄:
+            </div>
+            <div class="trm-label trm-label-light">
+                25
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                城市:
+            </div>
+            <div class="trm-label trm-label-light">
+                北京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                星球:
+            </div>
+            <div class="trm-label trm-label-light">
+                火星
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:1768900816@qq.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div class="trm-page-content col-lg-8">
+                <div id="trm-content" class="trm-content">
+                    <div class="trm-post-info row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            01/17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            20:37
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            Cheng Jiaxin
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <ul>
+<li><code>&lt;!DOCTYPE html&gt;</code>声明必须位于文档的第一行</li>
+<li>中文网页需要使用<code>&lt;m1·eta charset=&quot;utf-8&quot;&gt;</code>声明编码，否则会出现乱码</li>
+<li>HTML是超文本标记语言</li>
+</ul>
+<hr>
+<h2 id="一、-html基础"><a href="#一、-html基础" class="headerlink" title="一、 html基础"></a>一、 html基础</h2><p>(一). 标题</p>
+<blockquote>
+<p><code>&lt;h1&gt;这是一个标题&lt;/h1&gt;</code></p>
+</blockquote>
+<p>(二). 段落</p>
+<blockquote>
+<p><code>&lt;p&gt;这是一个段落&lt;/p&gt;</code></p>
+</blockquote>
+<p>(三). 链接</p>
+<blockquote>
+<p><code>&lt;a href=&quot;https://www.runoob.com&quot;&gt;这是一个链接&lt;/a&gt;</code></p>
+</blockquote>
+<p>(三). 图像</p>
+<blockquote>
+<p><code>&lt;img src=&quot;/images/logo.png&quot; width=&quot;258&quot; height=&quot;39&quot;/&gt;</code></p>
+</blockquote>
+<p>(四).其他</p>
+<blockquote>
+<p>换行<br><code>&lt;br&gt;</code><br>水平线<br><code>&lt;hr&gt;</code><br>定义注释</p>
+<!--...--></blockquote>
+<hr>
+<h2 id="二、html属性"><a href="#二、html属性" class="headerlink" title="二、html属性"></a>二、html属性</h2><p>(一). 全局属性</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">作用</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">id</td>
+<td align="left">为元素指定唯一的标识符</td>
+<td align="left"><code>&lt;div id=&quot;header&quot;&gt;This is the header&lt;/div&gt;</code></td>
+</tr>
+<tr>
+<td align="left">class</td>
+<td align="left">为元素指定一个或多个类名，用于 CSS 或 JavaScript 选择符</td>
+<td align="left"><code>&lt;p class=&quot;text highlight&quot;&gt;This is a highlighted text.&lt;/p&gt;</code></td>
+</tr>
+<tr>
+<td align="left">style</td>
+<td align="left">用于直接在元素上应用 CSS 样式</td>
+<td align="left"><code>&lt;p style=&quot;color: blue; font-size: 14px;&quot;&gt;This is a styled paragraph.&lt;/p&gt;</code></td>
+</tr>
+<tr>
+<td align="left">title</td>
+<td align="left">为元素提供额外的提示信息，通常在鼠标悬停时显示</td>
+<td align="left"><code>&lt;abbr title=&quot;HyperText Markup Language&quot;&gt;HTML&lt;/abbr&gt;</code></td>
+</tr>
+<tr>
+<td align="left">data-*</td>
+<td align="left">用于存储自定义数据，通常通过 JavaScript 访问</td>
+<td align="left"><code>&lt;div data-user-id=&quot;12345&quot;&gt;User Info&lt;/div&gt;</code></td>
+</tr>
+</tbody></table>
+<p>(二). 特定元素属性</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">作用</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">href</td>
+<td align="left">（用于 <code>&lt;a&gt;</code> 和 <code>&lt;link&gt;</code>元素）:指定链接的目标 URL</td>
+<td align="left"><code>&lt;a href=&quot;https://www.example.com&quot;&gt;Visit Example&lt;/a&gt;</code></td>
+</tr>
+<tr>
+<td align="left">src</td>
+<td align="left">（用于<code> &lt;img&gt;</code>, <code>&lt;script&gt;</code>, <code>&lt;iframe&gt; </code>等元素）：指定外部资源的 URL</td>
+<td align="left"><code>&lt;img src=&quot;image.jpg&quot; alt=&quot;An example image&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left">alt</td>
+<td align="left">（用于 <code>&lt;img&gt;</code> 元素）：为图像提供替代文本，当图像无法显示时显示</td>
+<td align="left"><code>&lt;img src=&quot;image.jpg&quot; alt=&quot;An example image&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">（用于<code> &lt;input&gt;</code> 和 <code>&lt;button&gt;</code> 元素）:指定输入控件的类型</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; placeholder=&quot;Enter your name&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left">value</td>
+<td align="left">（用于 <code>&lt;input&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;option&gt;</code> 等元素）：指定元素的初始值</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; value=&quot;Default Value&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left">disabled</td>
+<td align="left">（用于表单元素）：禁用元素，使其不可交互</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; disabled&gt;</code></td>
+</tr>
+<tr>
+<td align="left">checked</td>
+<td align="left">（用于 <code>&lt;input type=&quot;checkbox&quot;&gt;</code> 和 <code>&lt;input type=&quot;radio&quot;&gt;</code>）:指定复选框或单选按钮是否被选中</td>
+<td align="left"><code>&lt;input type=&quot;checkbox&quot; checked&gt;</code></td>
+</tr>
+<tr>
+<td align="left">placeholder</td>
+<td align="left">（用于 <code>&lt;input&gt; </code>和 <code>&lt;textarea&gt; </code>元素）：在输入框中显示提示文本</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; placeholder=&quot;Enter your email&quot;&gt;</code></td>
+</tr>
+<tr>
+<td align="left">target</td>
+<td align="left">（用于 <code>&lt;a&gt; </code>和 <code>&lt;form&gt;</code> 元素）：指定链接或表单提交的目标窗口或框架</td>
+<td align="left"><code>&lt;a href=&quot;https://www.example.com&quot; target=&quot;_blank&quot;&gt;Open in new tab&lt;/a&gt;</code></td>
+</tr>
+</tbody></table>
+<p>(三). 布尔属性</p>
+<table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="left">作用</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">disabled</td>
+<td align="left">禁用元素</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; disabled&gt;</code></td>
+</tr>
+<tr>
+<td align="left">readonly</td>
+<td align="left">使输入框只读</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; readonly&gt;</code></td>
+</tr>
+<tr>
+<td align="left">required</td>
+<td align="left">指定输入字段为必填项</td>
+<td align="left"><code>&lt;input type=&quot;text&quot; required&gt;</code></td>
+</tr>
+<tr>
+<td align="left">autoplay</td>
+<td align="left">（用于 <code>&lt;audio&gt;</code>和 <code>&lt;video&gt;</code> 元素）：自动播放媒体</td>
+<td align="left"><code>&lt;video src=&quot;video.mp4&quot; autoplay&gt;&lt;/video&gt;</code></td>
+</tr>
+</tbody></table>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">新元素标签</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&lt;canvas&gt;</code></td>
+<td align="left">定义图形，基于JavaScript</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">新多媒体元素</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&lt;audio&gt;</code></td>
+<td align="left">定义音频内容</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;video&gt;</code></td>
+<td align="left">定义视频</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;source&gt;</code></td>
+<td align="left">定义多媒体资源<code>&lt;video&gt;</code>和<code>&lt;audio&gt;</code></td>
+</tr>
+<tr>
+<td align="center"><code>&lt;embed&gt;</code></td>
+<td align="left">定义嵌入的内容，如插件</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;track&gt;</code></td>
+<td align="left">为<code>&lt;video&gt;</code>和<code>&lt;audio&gt;</code>元素规定外部文本轨道</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">新表单元素</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&lt;datalist&gt;</code></td>
+<td align="left">定义选项列表</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;keygen&gt;</code></td>
+<td align="left">规定用于表单的密钥对生成器字段</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;output&gt;</code></td>
+<td align="left">定义不同类型的输出</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">新的语义和结构元素</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>&lt;article&gt;</code></td>
+<td align="left">定义页面独立的内容区域</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;aside&gt;</code></td>
+<td align="left">定义页面的侧边栏内容</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;bdi&gt;</code></td>
+<td align="left">允许设置一段文本，使其脱离父元素的文本方向设置</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;command&gt;</code></td>
+<td align="left">定义命令按钮</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;details&gt;</code></td>
+<td align="left">用于描述文档或文档某个部分的细节</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;dialog&gt;</code></td>
+<td align="left">定义对话框</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;summary&gt;</code></td>
+<td align="left">标签包含details元素的标题</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;figure&gt;</code></td>
+<td align="left">规定独立的流内容</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;figcaption&gt;</code></td>
+<td align="left">定义<code>&lt;figure&gt;</code>元素的标题</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;footer&gt;</code></td>
+<td align="left">定义section或document的页脚</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;header&gt;</code></td>
+<td align="left">定义了文档的头部区域</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;mark&gt;</code></td>
+<td align="left">定义带有记号的文本</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;meter&gt;</code></td>
+<td align="left">定义度量衡</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;nav&gt;</code></td>
+<td align="left">定义导航链接的部分</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;progress&gt;</code></td>
+<td align="left">定义任何类型的任务进度</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;ruby&gt;</code></td>
+<td align="left">定义ruby注释</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;rt&gt;</code></td>
+<td align="left">定义字符的解释或发音</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;rp&gt;</code></td>
+<td align="left">在ruby注释中使用，定义不支持ruby元素的浏览器所显示的内容</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;section&gt;</code></td>
+<td align="left">定义文档中的节</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;time&gt;</code></td>
+<td align="left">定义日期或时间</td>
+</tr>
+<tr>
+<td align="center"><code>&lt;wbr&gt;</code></td>
+<td align="left">规定在文本中的何处适合添加换行符</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、文本格式"><a href="#三、文本格式" class="headerlink" title="三、文本格式"></a>三、文本格式</h2><h3 id="一-HTML-文本格式化标签"><a href="#一-HTML-文本格式化标签" class="headerlink" title="(一)HTML 文本格式化标签"></a>(一)HTML 文本格式化标签</h3><table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;b&gt;</code></td>
+<td align="left">定义粗体文本</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;em&gt;</code></td>
+<td align="left">定义着重文字</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;i&gt;</code></td>
+<td align="left">定义斜体字</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;small&gt;</code></td>
+<td align="left">定义小号字</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;strong&gt;</code></td>
+<td align="left">定义加重语气</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;sub&gt;</code></td>
+<td align="left">定义下标字</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;sup&gt;</code></td>
+<td align="left">定义上标字</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;ins&gt;</code></td>
+<td align="left">定义插入字</td>
+</tr>
+</tbody></table>
+<h3 id="二-HTML”计算机输出”标签"><a href="#二-HTML”计算机输出”标签" class="headerlink" title="(二)HTML”计算机输出”标签"></a>(二)HTML”计算机输出”标签</h3><table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;code&gt;</code></td>
+<td align="left">定义计算机代码</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;kbd&gt;</code></td>
+<td align="left">定义键盘码</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;samp&gt;</code></td>
+<td align="left">定义计算机代码样本</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;var&gt;</code></td>
+<td align="left">定义变量</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;pre&gt;</code></td>
+<td align="left">定义预格式文本</td>
+</tr>
+</tbody></table>
+<h3 id="三-HTML引文，引用，及标签定义"><a href="#三-HTML引文，引用，及标签定义" class="headerlink" title="(三)HTML引文，引用，及标签定义"></a>(三)HTML引文，引用，及标签定义</h3><table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;abbr&gt;</code></td>
+<td align="left">定义缩写</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;address&gt;</code></td>
+<td align="left">定义地址</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;bdo&gt;</code></td>
+<td align="left">定义文字方向</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;blockquote&gt;</code></td>
+<td align="left">定义长的引用</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;q&gt;</code></td>
+<td align="left">定义短的引用语</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;cite&gt;</code></td>
+<td align="left">定义引用、引证</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;dfn&gt;</code></td>
+<td align="left">定义一个定义项目</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、链接"><a href="#四、链接" class="headerlink" title="四、链接"></a>四、链接</h2><h3 id="一-基本语法"><a href="#一-基本语法" class="headerlink" title="(一)基本语法"></a>(一)基本语法</h3><blockquote>
+<p><code>&lt;a href=&quot;URL&quot;&gt;链接文本&lt;/a&gt;</code></p>
+</blockquote>
+<h3 id="二-属性"><a href="#二-属性" class="headerlink" title="(二)属性"></a>(二)属性</h3><ol>
+<li><p>href 属性：指定目标URL</p>
+</li>
+<li><p>target属性：定义链接的打开方式</p>
+<ul>
+<li>_blank: 在新窗口或新标签页中打开链接</li>
+<li>_self: 在当前窗口或标签页中打开链接（默认）</li>
+<li>_parent: 在父框架中打开链接</li>
+<li>_top: 在整个窗口中打开链接，取消任何框架</li>
+</ul>
+</li>
+<li><p>rel属性：定义链接与目标页面的关系</p>
+<ul>
+<li>nofollow：表示搜索引擎不应该跟踪该链接，常用于外部链接</li>
+<li>noopener：防止新的浏览上下文（页面）访问window.opener属性和open方法</li>
+<li>noreferrer：不发送referer header（即不告诉目标网站你从哪里来的）</li>
+</ul>
+</li>
+<li><p>download属性：提示浏览器下载链接目标而不是导航到该目标</p>
+</li>
+<li><p>title属性：定义链接的额外信息，当鼠标悬停在链接上时显示的工具提示</p>
+</li>
+<li><p>id属性：用于链接锚点，通常在同一页面中跳转到某个特定位置</p>
+</li>
+<li><p>hreflang属性：指定链接的目标URL的语言</p>
+</li>
+<li><p>type属性：指定连接资源的MIME类型</p>
+</li>
+<li><p>class属性：用于指定袁术的类名(CSS中定义)</p>
+</li>
+<li><p>style属性：直接在元素上定义CSS样式</p>
+</li>
+</ol>
+<h3 id="三-空链接"><a href="#三-空链接" class="headerlink" title="(三)空链接"></a>(三)空链接</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">作用</th>
+<th align="left">是否会跳转</th>
+<th align="left">场景适用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>href=&quot;#&quot;</code></td>
+<td align="left">导航到页面顶部</td>
+<td align="left">是</td>
+<td align="left">占位符，捕获点击事件</td>
+</tr>
+<tr>
+<td align="left"><code>href=&quot;javascrip:void(0)&quot;</code></td>
+<td align="left">阻止默认行为，不刷新页面</td>
+<td align="left">否</td>
+<td align="left">阻止页面跳转，配合JS使用</td>
+</tr>
+<tr>
+<td align="left"><code>href=&quot;&quot;</code></td>
+<td align="left">刷新当前页面</td>
+<td align="left">是</td>
+<td align="left">需要页面刷新时</td>
+</tr>
+<tr>
+<td align="left"><code>href=&quot;about:blank&quot;</code></td>
+<td align="left">打开空白页面</td>
+<td align="left">是</td>
+<td align="left">新窗口打开空白页面</td>
+</tr>
+<tr>
+<td align="left"><code>href=&quot;button&quot;</code></td>
+<td align="left">链接表现为按钮，无默认行为</td>
+<td align="left">否</td>
+<td align="left">配合JS实现按钮功能，无跳转</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、HTML头部"><a href="#五、HTML头部" class="headerlink" title="五、HTML头部"></a>五、HTML头部</h2><p><code>&lt;head&gt;</code>元素包含所有的头部标签元素。可以插入脚本，样式文件，以及各种meta信息。可以在头部添加元素标签有：<code>&lt;title&gt;</code>，<code>&lt;style&gt;</code>，<code>&lt;meta&gt;</code>，<code>&lt;link&gt;</code>，<code>&lt;script&gt;</code>，<code>&lt;noscript&gt;</code>和<code>&lt;base&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;head&gt;</code></td>
+<td align="left">定义文档信息</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;title&gt;</code></td>
+<td align="left">定义文档标题</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;base&gt;</code></td>
+<td align="left">定义页面链接标签的默认链接地址</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;link&gt;</code></td>
+<td align="left">定义文档和外部资源之间的关系</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;meta&gt;</code></td>
+<td align="left">定义HTML文档中的元数据</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;script&gt;</code></td>
+<td align="left">定义客户端的脚本文件</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;style&gt;</code></td>
+<td align="left">定义HTML文档的样式文件</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="HTML样式-CSS"><a href="#HTML样式-CSS" class="headerlink" title="HTML样式-CSS"></a>HTML样式-CSS</h2><p>用于渲染HTML元素标签的样式</p>
+<p>方式：</p>
+<ul>
+<li>内联样式-在HTML元素中使用style属性</li>
+<li>内部样式表-在HTML文档头部<code>&lt;head&gt;</code>使用元素来包含CSS</li>
+<li>外部引用-使用外部CSS文件（<strong>推荐</strong>👍）</li>
+</ul>
+<h3 id="内联样式"><a href="#内联样式" class="headerlink" title="内联样式"></a>内联样式</h3><p>使用style属性，具体学习CSS<br>示例：</p>
+<blockquote>
+<p><code>&lt;p style=&quot;color:blue;margin-left:20px;&quot;&gt;这是一个段落。&lt;/p&gt;</code></p>
+</blockquote>
+<h3 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h3><p>在<code>&lt;head&gt;</code>部分通过<code>&lt;style&gt;</code>标签定义内部样式表</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-tag">body</span> &#123;<span class="attribute">background-color</span>:yellow;&#125;</span></span><br><span class="line"><span class="language-css"><span class="selector-tag">p</span> &#123;<span class="attribute">color</span>:blue;&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="外部引用"><a href="#外部引用" class="headerlink" title="外部引用"></a>外部引用</h3><p>当样式需要被应用到很多页面的时候，可通过改变一个文件来改变整个站点外观</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;mystyle.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="六、HTML图像"><a href="#六、HTML图像" class="headerlink" title="六、HTML图像"></a>六、HTML图像</h2><p><code>&lt;img&gt;</code>是空标签，只包含属性没有闭合标签<br>基本语法：</p>
+<blockquote>
+<p><code>&lt;img src=&quot;url&quot; alt=&quot;some_text&quot; width=&quot;304&quot; height=&quot;208&quot;&gt;</code></p>
+</blockquote>
+<p>注意事项：</p>
+<ul>
+<li>要注意插入页面图像的路径，如果不能正确设置图像的位置，浏览器无法加载图片，图像标签就会显示一个破碎的图片</li>
+</ul>
+<h2 id="七、HTML表格"><a href="#七、HTML表格" class="headerlink" title="七、HTML表格"></a>七、HTML表格</h2><p><code>&lt;table&gt;</code>标签定义表格</p>
+<ul>
+<li><code>&lt;tr&gt;</code>标签表示表格的一行</li>
+<li><code>&lt;td&gt;</code>标签表示表格的数据单元格</li>
+<li><code>&lt;th&gt;</code>标签表示表格的表头单元格</li>
+<li><code>&lt;thead&gt;</code>标签用于定义表格的标题部分</li>
+<li><code>&lt;tbody&gt;</code>标签定义表格的主体部分</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;caption&gt;</code></td>
+<td align="left">定义表格标题</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;colgroup&gt;</code></td>
+<td align="left">定义表格列的组</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;col&gt;</code></td>
+<td align="left">定义用于表格列的属性</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;thead&gt;</code></td>
+<td align="left">定义表格的页眉</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;tbody&gt;</code></td>
+<td align="left">定义表格的主体</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;tfool&gt;</code></td>
+<td align="left">定义表格的页脚</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、HTML列表"><a href="#八、HTML列表" class="headerlink" title="八、HTML列表"></a>八、HTML列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>使用<code>&lt;ol&gt;</code>标签<br>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Milk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用<code>&lt;ul&gt;</code>标签<br>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Milk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h3><p>使用<code>&lt;dl&gt;</code>标签，每个自定义列表项以<code>&lt;dt&gt;</code>开始。每个自定义列表项的定义以 <code>&lt;dd&gt;</code> 开始</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dt</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dd</span>&gt;</span>- black hot drink<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dt</span>&gt;</span>Milk<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dd</span>&gt;</span>- white cold drink<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、HTML-区块"><a href="#九、HTML-区块" class="headerlink" title="九、HTML 区块"></a>九、HTML 区块</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">实例</th>
+<th align="left">区别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">块级元素</td>
+<td align="left"><code> &lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;table&gt;</code></td>
+<td align="left">在浏览器显示时，通常以新行开始和结束</td>
+</tr>
+<tr>
+<td align="left">内联元素</td>
+<td align="left"><code>&lt;b&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code></td>
+<td align="left">在显示通常不以新行开始</td>
+</tr>
+</tbody></table>
+<h3 id="一-元素"><a href="#一-元素" class="headerlink" title="(一)&lt;div&gt;元素"></a>(一)<code>&lt;div&gt;</code>元素</h3><p>HTML <code>&lt;div&gt;</code> 元素是块级元素，它可用于组合其他 HTML 元素的容器。</p>
+<div> 元素没有特定的含义。
+
+<h3 id="二-元素"><a href="#二-元素" class="headerlink" title="(二)&lt;span&gt;元素"></a>(二)<code>&lt;span&gt;</code>元素</h3><p>HTML <code>&lt;span&gt;</code> 元素是内联元素，可用作文本的容器<br>没有特定的含义</p>
+<p>可以使用<code>&lt;div&gt;</code>和<code>&lt;table&gt;</code>进行布局</p>
+<hr>
+<h2 id="十、HTML表单"><a href="#十、HTML表单" class="headerlink" title="十、HTML表单"></a>十、HTML表单</h2><p>表单用于收集用户输入信息，包括输入字段、复选框、单选按钮、下拉列表等元素</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;from&gt;</code></td>
+<td align="left">用于创建表单，action 属性定义了表单数据提交的目标 URL，method 属性定义了提交数据的 HTTP 方法<br>lmethod属性用于定义表单数据提交方式，方式如下：<br>post：表单数据包含在表单内然后发给服务器，用于提交敏感数据<br>get：表单数据会附加在action属性的URL中，以<code>？</code>作为分隔符，不用于敏感信息</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;label&gt;</code></td>
+<td align="left">为表单元素添加标签</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;input&gt;</code></td>
+<td align="left">最常用的表单元素之一，它可以创建文本输入框、密码框、单选按钮、复选框等。<br>type 属性定义了输入框的类型，id 属性用于关联 <code>&lt;label&gt; </code>元素，name 属性用于标识表单字段</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;select&gt;</code></td>
+<td align="left">用于创建下拉列表，而<code>&lt;option&gt;</code>元素用于定义下拉列表中的选项</td>
+</tr>
+</tbody></table>
+<p>type属性常用输入类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">标签</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">文本域</td>
+<td align="left">type&#x3D;”text”</td>
+</tr>
+<tr>
+<td align="left">密码字段</td>
+<td align="left">type&#x3D;”password”</td>
+</tr>
+<tr>
+<td align="left">单选按钮</td>
+<td align="left">type&#x3D;”radio”</td>
+</tr>
+<tr>
+<td align="left">复选框</td>
+<td align="left">type&#x3D;”checkbox”</td>
+</tr>
+<tr>
+<td align="left">提交按钮</td>
+<td align="left">type&#x3D;”submit”</td>
+</tr>
+</tbody></table>
+<p>表单标签</p>
+<table>
+<thead>
+<tr>
+<th align="left">标签</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;textarea&gt;</code></td>
+<td align="left">定义文本域(一个多行的输入控件)</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;fieldset&gt;</code></td>
+<td align="left">定义了一组相关的表单元素，使用外框包含起来</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;legend&gt;</code></td>
+<td align="left">定义了<code>&lt;fieldset&gt;</code>元素的标题</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;optgroup&gt;</code></td>
+<td align="left">定义选项组</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;button&gt;</code></td>
+<td align="left">定义一个点击按钮</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;datalist&gt;</code></td>
+<td align="left">指定一个预先定义的输入控件选项列表</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;keygen&gt;</code></td>
+<td align="left">定义了表单的密钥对生成器字段</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;output&gt;</code></td>
+<td align="left">定义一个计算结果</td>
+</tr>
+</tbody></table>
+<h2 id="十一、HTML框架"><a href="#十一、HTML框架" class="headerlink" title="十一、HTML框架"></a>十一、HTML框架</h2><p>用处：在同一个浏览器窗口中显示不止一个页面<br>iframe语法：</p>
+<blockquote>
+<p><code>&lt;iframe src=&quot;URL&quot;&gt;&lt;/iframe&gt;</code></p>
+</blockquote>
+<p>常用属性：</p>
+<ul>
+<li>高度和宽度：width，height</li>
+<li>边框：frameborder</li>
+</ul>
+<h2 id="十二、HTML颜色"><a href="#十二、HTML颜色" class="headerlink" title="十二、HTML颜色"></a>十二、HTML颜色</h2><p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&quot;background-color:rgba(255,255,0,0.75)&quot;</span>&gt;</span></span><br><span class="line">通过 rbg 值设置背景颜色</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="十三、HTML脚本"><a href="#十三、HTML脚本" class="headerlink" title="十三、HTML脚本"></a>十三、HTML脚本</h2><p><code>&lt;script&gt;</code> 标签用于定义客户端脚本，比如 JavaScript</p>
+<p>示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Hello World!&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;noscript&gt;</code> 标签提供无法使用脚本时的替代内容，比方在浏览器禁用脚本时，或浏览器不支持客户端脚本时</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;Hello World!&quot;</span>)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">noscript</span>&gt;</span>抱歉，你的浏览器不支持 JavaScript!<span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>相关知识速查列表：<a target="_blank" rel="noopener" href="https://www.runoob.com/html/html-quicklist.html">https://www.runoob.com/html/html-quicklist.html</a></p>
+
+</article>
+    
+    
+
+</div>
+<div class="trm-post-next-prev row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2026/01/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/image/judy.png">
+                </span>
+                <h6 class="trm-op-title">git常用命令</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>26/01/17</li>
+                <li>20:37</li>
+                <li>技术</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2026/01/17/Markdown%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/image/judy.png">
+                </span>
+                <h6 class="trm-op-title">Markdown学习总结</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>26/01/17</li>
+                <li>20:37</li>
+                <li>技术</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-footer-card trm-scroll-animation">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2026 - 2026</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">萝卜煎饺</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v8.1.1
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.2.7
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item blog-run-long"></div>
+     
+
+     
+</footer>
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            
+
+            
+<div class="trm-fixed-container">
+    
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=2.2.7"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+		
+			<script src="/js/plugins/danmu.js?v=2.2.7"></script>
+		
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.2.7"></script>
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+</body>
+
+</html>
